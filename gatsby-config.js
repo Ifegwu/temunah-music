@@ -1,16 +1,30 @@
+const dotenv = require(`dotenv`);
+
+dotenv.config({ path: '.env' });
+// console.log(process.env.SANITY_TOKEN);
+
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    title: `Temunah Music`,
+    description: `Promoting Musical Talents`,
+    author: `@Daniel`
   },
   plugins: [
+    {
+      resolve: `gatsby-plugin-material-ui`,
+      options: {
+        stylesProvider: {
+          injectFirst: true,
+        },
+      },
+    },
+    `gatsby-plugin-styled-components`,
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `images`,
-        path: `${__dirname}/src/images`,
+        path: `${__dirname}/src/assets/images`,
       },
     },
     `gatsby-transformer-sharp`,
@@ -24,8 +38,31 @@ module.exports = {
         background_color: `#663399`,
         theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+        icon: `static/logo.svg`, // This path is relative to the root of the site.
       },
+    },
+    {
+      resolve: 'gatsby-source-sanity',
+      options: {
+        projectId: 'gbd938gi',
+        dataset: 'production',
+        watchMode: true,
+        token: process.env.SANITY_TOKEN
+      }
+    },
+    {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        trackingId: "UA-54516992-1",
+        head: true
+      }
+    },
+    {
+      resolve: "gatsby-plugin-mailchimp",
+      options: {
+        endpoint:
+          "https://gmail.us17.list-manage.com/subscribe?u=f1944ba4ef19adb37767acbe3&id=0ca64b75f6" // add your MC list endpoint here; see instructions below
+      }
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline

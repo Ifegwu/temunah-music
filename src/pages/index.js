@@ -1,22 +1,43 @@
-import React from "react"
-import { Link } from "gatsby"
+import React, { useState, useEffect } from 'react';
+import Layout from '../components/Frontend/Layout';
+import { parse } from "query-string"
+import { useLocation } from "@reach/router"
+import { Snackbar } from '@material-ui/core';
+import theme from '../components/ThemeModified'
+import { ThemeProvider } from 'styled-components';
 
-import Layout from "../components/layout"
-import Image from "../components/image"
-import SEO from "../components/seo"
+const IndexPage = ({ children }) => {
+  const [openError, setOpenError] = useState(true)
+  const [param, setParam] = useState(false)
+  
+  	const location = useLocation()
+	useEffect(() => {
+		const searchParams = parse(location.search)
+		setParam(searchParams)
+		// console.log(searchParams.message)
+		
+		if(openError){
+			setTimeout(() => {
+				setOpenError(false)
+			}, 6000)
+		}	
+	}, [setParam])
 
-const IndexPage = () => (
-  <Layout>
-    <SEO title="Home" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
-    </div>
-    <Link to="/page-2/">Go to page 2</Link> <br />
-    <Link to="/using-typescript/">Go to "Using TypeScript"</Link>
-  </Layout>
-)
 
-export default IndexPage
+  return (
+    <Layout>
+		<>
+			{
+				param.message && 
+					<ThemeProvider theme={theme}>
+						<Snackbar message={param.message} open={openError} autoHideDuration={6000} />
+					</ThemeProvider>
+			}
+			{children}
+		</>
+    </Layout>
+  )
+}
+
+export default IndexPage;
+
