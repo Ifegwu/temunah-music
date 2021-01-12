@@ -16,6 +16,8 @@ import Signout from '../Auth/Signout'
 import {ApolloConsumer}  from 'react-apollo'
 import { createCookie } from '../../utils/client'
 import { navigate } from "@reach/router";
+import Avatar from '@material-ui/core/Avatar';
+import { IconButton } from '@material-ui/core'
 
 const Profile = React.lazy(() => import('../../pages/profile'))
 const Music = React.lazy(() => import('../../pages/music'))
@@ -26,7 +28,10 @@ const ContentStyle = styled.div`
     background: white;
     /* padding: 2rem; */
 `
-
+const AvatarGrid = styled.div`
+    color: var(--naturalLight)
+    backgroun-color: var(--blueOverlay)
+`
 const size = {
     mobileS: '320px',
     mobileM: '375px',
@@ -166,9 +171,9 @@ export default function Layout({ children, props }) {
                                                 </li>
                                                 <li>
                                                     <Link to="/profile">
-                                                        <div>
-                                                        {currentUser.username}
-                                                        </div>
+                                                        <Avatar style={{ backgroundColor: 'var(--pink)' }}>
+                                                            {currentUser.username[0]}
+                                                        </Avatar>
                                                     </Link>
                                                 </li>
                                                 <li>

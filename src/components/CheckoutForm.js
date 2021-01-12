@@ -48,6 +48,7 @@ const CheckoutForm = ({ classes }) => {
     const [openError, setOpenError] = useState(true);
     const [submitting, setSubmitting] = useState(false)
     const [fileError, setFileError] = useState("")
+    const [error, setError] = useState(null)
     const stripe = useStripe();
     const elements = useElements();
     
@@ -56,9 +57,9 @@ const CheckoutForm = ({ classes }) => {
     // Handle real-time validation errors from the CardElement.
     const handleChange = (event) => {
         if (event.error) {
-            setFileError(event.error.message);
+            setError(event.error.message);
         } else {
-            setFileError("");
+            setError(null);
         }
     }
     
@@ -72,7 +73,10 @@ const CheckoutForm = ({ classes }) => {
             type: 'card',
             card: card
         });
-        
+        console.log(paymentMethod)
+        if (error) {
+            setError(error.response.data)
+        }
         if (!stripe || !elements) {
             return;
         } 
@@ -160,7 +164,7 @@ const CheckoutForm = ({ classes }) => {
                                             },
                                         }}
                                     />
-                                    <FormHelperText>{fileError}</FormHelperText>
+                                    <FormHelperText>{error}</FormHelperText>
 
                                 </CardStyles>
                             </FormControl>
@@ -194,7 +198,7 @@ const CheckoutForm = ({ classes }) => {
 				disableBackdropClick={true}
 			    TransitionComponent={Transition}
             >
-                <ThemeProvider>
+                <ThemeProvider theme={theme}>
                     <DialogTitle>
                         <VerifiedUserTwoTone className={classes.icon} />
                                 New Susbscription

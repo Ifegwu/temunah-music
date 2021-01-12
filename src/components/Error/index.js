@@ -53,15 +53,15 @@ const Error = ({ classes, error, client, currentUser }) => {
       }
     }
 
-    const handleSinatureHasExpired = () => {
-      if (currentUser || client) {
-        // localStorage.removeItem('authToken')
-        createCookie('authToken', '', -1);
-        sessionStorage.removeItem('authToken')
-        client.writeData({ data: { isLoggedIn: false } })
-        navigate("/auth?message=" + errorSignature )
-      }
-    }
+    // const handleSinatureHasExpired = () => {
+    //   if (currentUser || client) {
+    //     // localStorage.removeItem('authToken')
+    //     createCookie('authToken', '', -1);
+    //     sessionStorage.removeItem('authToken')
+    //     client.writeData({ data: { isLoggedIn: false } })
+    //     navigate("/auth?message=" + errorSignature )
+    //   }
+    // }
 
     const handleUndefinedRoot = () => {
       if (currentUser || client) {
@@ -110,9 +110,9 @@ const Error = ({ classes, error, client, currentUser }) => {
     if (error.message.toString().includes("Not Logged in!")) {
       handleNotLoggedInRoot()
     } 
-    if (error.message.toString().includes("Signature has expired")) {
-      handleSinatureHasExpired()
-    } 
+    // if (error.message.toString().includes("Signature has expired")) {
+    //   handleSinatureHasExpired()
+    // } 
     if (error.message.toString().includes("Signature has expired")) {
       handleSinatureHasExpiredRoot()
     } 

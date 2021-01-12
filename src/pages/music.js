@@ -10,13 +10,10 @@ import  CreateTrack from '../components/Dashboard/PrivateTrack/CreateTrack'
 import Updateuser from '../components/Dashboard/UpdateUser';
 import Loading from '../components/Auth/Loading'
 import Error from '../components/Error'
-import MainPayment from '../components/Dashboard/MainPayment'
 import theme from '../components/ThemeModified'
 import styled from 'styled-components';
-// import ChargeMe from '../components/Dashboard/ChargeMe';
-import Subscribe from '../components/Auth/Subscribe'
-import ChargeUser from '../components/Auth/ChargeUser';
 import Wrapper from '../components/Wrapper';
+import ProfileUser from '../components/Dashboard/ProfileUser';
 
 const Card = styled.div`
     display: flex;
@@ -65,6 +62,7 @@ const Music = ({ classes }) => {
     const [searchResults, setSearchResults] = useState([])
     return (
             <div className={classes.container}>
+                <ProfileUser />
                 <SearchTracks setSearchResults={setSearchResults}/>
                 <CreateTrack />
                 <Query query={GET_TRACKS_QUERY}>
@@ -86,10 +84,6 @@ const Music = ({ classes }) => {
                             </CardContent>
                             <CardContent>
                                 <h3>Monthly Promo</h3>
-                                {/* <ChargeMe /> */}
-                                {/* <Subscribe /> */}
-                                {/* <ChargeUser /> */}
-                                {/* <MainPayment /> */}
                                 <Wrapper />
                             </CardContent>
                         </Card>

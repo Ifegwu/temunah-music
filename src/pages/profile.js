@@ -96,8 +96,6 @@ const Profile = ({ classes }) => {
                             <Typography>
                               Amount: N{track.fee} &middot; Expires: {format(new Date(track.createdAt), 'MMM dd, yyyy')} + 30 days
                             </Typography>
-                            <Typography>
-                            </Typography>
                             <Divider className={classes.divider} />
                           </div>
                         ))}
@@ -147,7 +145,7 @@ const Profile = ({ classes }) => {
 }
 
 
-const PROFILE_QUERY = gql`
+export const PROFILE_QUERY = gql`
   query ($id: Int!){
     user(id: $id) {
       id
@@ -179,9 +177,10 @@ const PROFILE_QUERY = gql`
       subscriptionsSet {
         id
         email
+        fee
         music
         createdAt
-        subscribedBy {
+        subscriber {
           id
         }
       }

@@ -1,9 +1,25 @@
 import React, { useState } from "react"
 import withStyles from "@material-ui/core/styles/withStyles";
 import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
+// import DialogActions from "@material-ui/core/DialogActions";
+// import DialogContent from "@material-ui/core/DialogContent";
 import Button from "@material-ui/core/Button";
+import MuiDialogContent from "@material-ui/core/DialogContent";
+import MuiDialogActions from "@material-ui/core/DialogActions";
+
+const DialogContent = withStyles(theme => ({
+  root: {
+    padding: theme.spacing(2)
+  }
+}))(MuiDialogContent);
+
+const DialogActions = withStyles(theme => ({
+  root: {
+    margin: 0,
+    padding: theme.spacing(1)
+  }
+}))(MuiDialogActions);
+
 
 const WatchVedio = ({ classes, children }) => {
     const [open, setOpen] =  useState(false)
@@ -19,7 +35,7 @@ const WatchVedio = ({ classes, children }) => {
             <form>
               <DialogContent>
                         <Video
-                            videoSrcURL="https://www.youtube.com/embed/J0ayPhrmgis"
+                            videoSrcURL="https://www.youtube.com/embed/3sFzls0qY98"
                             videoTitle="Official Music Video on YouTube"
                         />            
               </DialogContent>
@@ -54,8 +70,8 @@ const styles = theme => ({
   container: {
     height: 100,
     width: 100,
-    maxHeight: 30,
-    minWidth: 160,
+    maxHeight: 300,
+    minWidth: 800,
     margin: "0 auto",
   },
   dialog: {

@@ -23,7 +23,6 @@ import SEO from "../components/seo"
 import ArtistsList from '../components/Frontend/ArtistsList';
 import AdvertList from '../components/Frontend/Adverts';
 import { useStaticQuery, graphql } from 'gatsby';
-import AdvertBanner from '../components/Frontend/AdvertBanner';
 import Musician from '../components/Frontend/Musician';
 import { Snackbar } from '@material-ui/core';
 import theme from '../components/ThemeModified'
@@ -313,9 +312,6 @@ const ArtistLanding = () => {
               <OverlayedContainer>
                   <AdvertList adverts={adverts}/>
               </OverlayedContainer>
-          </Section>
-          <Section>
-              <AdvertBanner />
           </Section>
           <Section>
               <OverlayedContainer>
