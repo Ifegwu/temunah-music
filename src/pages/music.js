@@ -99,7 +99,7 @@ const styles = theme => ({
         margin: "0 auto",
         maxWidth: "960",
         padding: theme.spacing(1),
-        paddingTop: theme.spacing(20)
+        paddingTop: theme.spacing(18)
     }
 })
 

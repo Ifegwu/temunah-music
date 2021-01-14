@@ -36,6 +36,7 @@ const REGISTER_MUTATION = gql`
 		}
 	}
 `
+
 const Transition = React.forwardRef((props, ref) => <Slide direction="up" {...props} ref={ref}/>)
 
 

@@ -49,7 +49,6 @@ const styles = theme => ({
     card: {
       display: "flex",
       justifyContent: "center",
-      paddingTop: theme.spacing(1),
     },
     title: {
       display: "flex",
