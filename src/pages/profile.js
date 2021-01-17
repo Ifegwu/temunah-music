@@ -71,7 +71,7 @@ const Profile = ({ classes }) => {
                 <CreateTrack />
                 <Card className={classes.card}>
                   <CardHeader
-                    avatar={<Avatar>{data.user.username[0]}</Avatar>}
+                    avatar={<Avatar>{data.user.username[0].toUpperCase()}</Avatar>}
                     title={data.user.username}
                     // subheader={`Joined ${format(data.user.dateJoined, 'MMM Do, YYYY')}`}
                     subheader={`Joined ${format(new Date(data.user.dateJoined), 'MMM dd, yyyy')}`}

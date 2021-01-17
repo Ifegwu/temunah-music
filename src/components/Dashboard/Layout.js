@@ -172,7 +172,7 @@ export default function Layout({ children, props }) {
                                                 <li>
                                                     <Link to="/profile">
                                                         <Avatar style={{ backgroundColor: 'var(--pink)' }}>
-                                                            {currentUser.username[0]}
+                                                            {currentUser.username[0].toUpperCase()}
                                                         </Avatar>
                                                     </Link>
                                                 </li>

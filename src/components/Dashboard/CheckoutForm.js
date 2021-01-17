@@ -111,7 +111,7 @@ const CheckoutForm = ({ classes }) => {
                     paymentMethodId: paymentMethod.id
                 }
             }).then(response => {
-                // console.log(response.data);
+                console.log(response.data);
                 setSubmitting(true);
                 setOpenSuccess(true)
                 setOpenError(false)
