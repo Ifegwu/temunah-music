@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react' 
+import React, { useState } from 'react' 
 import { gql } from 'apollo-boost'
 import withStyles from "@material-ui/core/styles/withStyles";
 import SettingsIcon from '@material-ui/icons/Settings';
@@ -22,31 +22,25 @@ import {
         LinearProgress 
     } from '@material-ui/core'
 
-import { UserContext } from '../Dashboard/Layout';
 
-const UpdateUser = ({ classes  }) => {
-    const currentUser = useContext(UserContext)
+const ForgotPassword = ({ classes  }) => {
     const [submitting, setSubmitting] =  useState(false)
     const [open, setOpen] = useState(false)
-    const [username, setUsername] = useState("")
     const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
+    const [username, setUsername] = useState("")
     const [fileError, setFileError] = useState("")
 
     // console.log({ currentUser })
-    const handleSubmit = async (event, updateUser, client) => {
+    const handleSubmit = async (event, forgotPassword, client) => {
         event.preventDefault()
-        console.log({updateUser})
-        if (updateUser.id && updateUser.length !== currentUser.id || currentUser.email !== email) {
-            setFileError(`Current user info does not match ${currentUser.email}`)
+        console.log({forgotPassword})
+        if (forgotPassword.length && forgotPassword.email) {
+            setFileError(`The email provided does not exist`)
         } else {
             setSubmitting(true)
-            updateUser({variables: {
-                id: currentUser.id,
-                username,
+            forgotPassword({variables: {
                 email,
-                password
-    
+                username
             }})
             // console.log({ updateUser })
             setFileError("")
@@ -61,18 +55,17 @@ const UpdateUser = ({ classes  }) => {
                 />
             </IconButton>
             <Mutation
-                mutation={UPDATE_PROFILE}
+                mutation={FORGOT_PASSWORD}
                 onCompleted={data => {
                     // console.log(data)
                     setSubmitting(false)
                     setOpen(false)
-                    setUsername("")
                     setEmail("")
-                    setPassword("")
+                    setUsername("")
                 }}
                 // update={handleUpdateCache}
             >
-                {(updateUser, { loading, error }) => {
+                {(forgotPassword, { loading, error }) => {
                     // console.log(updateUser)
                     if (error) return <Error error={error} />
                     
@@ -81,19 +74,17 @@ const UpdateUser = ({ classes  }) => {
                             {client => (
                             <Dialog open={open} className={classes.dialog}>
                                 <ThemeProvider theme={theme}>
-                                    <form onSubmit={event => handleSubmit(event, updateUser, client)}>
+                                    <form onSubmit={event => handleSubmit(event, forgotPassword, client)}>
                                         <DialogTitle>Update Your Profile</DialogTitle>
                                         <LinearProgress />
                                         <DialogContentText className={classes.textField}>
-                                            Fields cannot be empty. 
-                                            If intend not to edit any field,
-                                            provide the credential formally used.
+                                            If the email provided is correct, you will receive an email confirmation link.
                                         </DialogContentText>
                                         <DialogContent>
                                             <FormControl error={Boolean(fileError)} fullWidth>
                                                 <TextField
                                                     label="Username"
-                                                    placeholder="Edit your username"
+                                                    placeholder="Username"
                                                     onChange={event => setUsername(event.target.value)}
                                                     value={username}
                                                     className={classes.textField}
@@ -104,14 +95,6 @@ const UpdateUser = ({ classes  }) => {
                                                     placeholder="Email"
                                                     onChange={event => setEmail(event.target.value)}
                                                     value={email}
-                                                    className={classes.textField}
-                                                />
-                                                <FormHelperText>{fileError}</FormHelperText>
-                                                <TextField
-                                                    label="Password"
-                                                    placeholder="Password"
-                                                    onChange={event => setPassword(event.target.value)}
-                                                    value={password}
                                                     className={classes.textField}
                                                 />
                                                 <FormHelperText>{fileError}</FormHelperText>
@@ -127,7 +110,7 @@ const UpdateUser = ({ classes  }) => {
                                             </Button>
                                             <Button
                                                 disabled={
-                                                    submitting || !username.trim() || !password.trim()
+                                                    submitting || !email.trim()
                                                 }
                                                 type="submit"
                                                 className={classes.save}
@@ -135,7 +118,7 @@ const UpdateUser = ({ classes  }) => {
                                                 {submitting ? (
                                                     <CircularProgress className={classes.save} size={24} />
                                                 ) : (
-                                                    "Update Profile"
+                                                    "Update Password"
                                                 )}
                                             </Button>
                                         </DialogActions>
@@ -163,7 +146,10 @@ const styles = theme => ({
       maxWidth: 550
     },
     textField: {
-      margin: theme.spacing(1)
+      margin: theme.spacing(1),
+      paddingLeft: 4,
+      paddingright: 4,
+      textAlign: 'center'
     },
     cancel: {
       color: "red"
@@ -182,20 +168,16 @@ const styles = theme => ({
     }
   });
 
-export default withStyles(styles)(UpdateUser);
+export default withStyles(styles)(ForgotPassword);
 
-const  UPDATE_PROFILE = gql`
-    mutation($username: String, $email: String, $password: String) {
-        updateUser(
-        userData: {username: $username, email: $email, password: $password}
-        ){
-        user {
-            id
-            username
-            email
-            password
+const  FORGOT_PASSWORD = gql`
+    mutation($email: String!, $username: String!) {
+        forgotPassword: passwordRecovery(email: $email, username: $username) {
+            user {
+                email,
+                username
+            }
         }
-        }
-    } 
+    }
 `
 

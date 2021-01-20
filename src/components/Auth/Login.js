@@ -13,11 +13,20 @@ import Button from "@material-ui/core/Button";
 import Lock from "@material-ui/icons/Lock"
 import Error from '../Error'
 import withStyles from "@material-ui/core/styles/withStyles";
-import { navigate } from 'gatsby';
+import { navigate, Link } from 'gatsby';
 import { ThemeProvider } from '@material-ui/core';
 import theme from '../ThemeModified'
+import styled from 'styled-components'
 import { createCookie } from '../../utils/client';
 
+const StyledLink = styled(Link)`
+	text-decoration: none;
+	color: indigo;
+	font-size: 20px;
+`
+
+
+export const API_URL ='http://localhost:8000'
 
 const Login = ({ classes, setNewUser }) => {
     const [username, setUsername] = useState("")
@@ -46,7 +55,9 @@ const Login = ({ classes, setNewUser }) => {
 					<Avatar  className={classes.avatar}>
 						<Lock />
 					</Avatar >
-					<Typography variant="inherit">Login as Existing User</Typography>
+					<Typography variant="center" color="textPrimary" variant='h5'>
+						Login as Existing User
+					</Typography>
 
 					<Mutation mutation={LOGIN_MUTATION}
 						variables={{ username, password }}
@@ -109,7 +120,12 @@ const Login = ({ classes, setNewUser }) => {
 							)
 						}}
 					</Mutation>
-
+						<Typography variant="center" color="textPrimary" variant='h6'>
+							
+							{/* <ForgotPassword /> */}
+							{/* <PasswordReset /> */}
+							<StyledLink to={`${API_URL}/api/password-reset`}>Forgot password</StyledLink>
+						</Typography>
 				</ThemeProvider>
 			</Paper>
 		</div>
