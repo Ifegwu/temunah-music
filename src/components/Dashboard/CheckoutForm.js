@@ -19,16 +19,47 @@ import {
     ThemeProvider, 
     FormHelperText,
     FormControl,
-    Snackbar,
     Slide
 } from "@material-ui/core";
 import withStyles from "@material-ui/core/styles/withStyles";
 import theme from '../ThemeModified'
-import Error from '../Error'
 import { UserContext } from './Layout'
 import styled from 'styled-components';
 import { VerifiedUserTwoTone } from "@material-ui/icons";
-import { navigate } from "gatsby";
+
+const StripeButton = styled(Button)`
+    /* Auto Layout */
+
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 10px 30px;
+
+    position: static;
+    width: 250px;
+    height: 44px;
+    left: 30px;
+
+    background: #00CFFD;
+    box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.3);
+    border-radius: 21.4427px;
+
+    &:hover {
+        background-color: #5469d4;
+        /* background-color: var(--softRed); */
+    }
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+
+    /* Inside Auto Layout */
+
+    flex: none;
+    order: 2;
+    align-self: flex-start;
+    flex-grow: 0;
+    margin: 0px 30px;
+`
 
 const CardStyles = styled.div`
     display: grid;
@@ -128,14 +159,16 @@ const CheckoutForm = ({ classes }) => {
 
     return (
         <>
-            <IconButton onClick={() => setOpen(true)}>
-                <PaymentIcon
-                style={{ fontSize: 20 }}
-                color="primary"
-                >
-                    {open ? <ClearIcon /> : <AddIcon /> }
-                </PaymentIcon>
-            </IconButton>
+                {/* <IconButton onClick={() => setOpen(true)}> */}
+                <StripeButton onClick={() => setOpen(true)}>
+                        <PaymentIcon
+                            style={{ fontSize: 20 }}
+                            color="primary"
+                        >
+                            {open ? <ClearIcon /> : <AddIcon /> }
+                        </PaymentIcon>
+                </StripeButton>
+                {/* </IconButton> */}
             <Dialog open={open} className={classes.dialog}>
                 <ThemeProvider theme={theme}>
                     <Mutation mutation={PAYMENT_MUTATION}>

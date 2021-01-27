@@ -41,7 +41,7 @@ const NewsLetterForm = () => {
               type="email"
               onChange={_handleChange}
               placeholder="your@email.com"
-              name="email"
+              name="Email"
               className="newsletterInput"
             />
             <SubmitBtn

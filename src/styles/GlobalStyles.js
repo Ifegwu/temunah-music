@@ -166,7 +166,7 @@ const GlobalStyles = createGlobalStyle`
     box-shadow: var(--level-3);
     margin-bottom: 1rem;
     border-radius: 5px;
-    padding-top: 50px;
+    padding-top: 20px;
     pointer-events: all;
     flex: 1;
     max-width: 400px;

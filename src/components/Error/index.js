@@ -72,15 +72,15 @@ const Error = ({ classes, error, client, currentUser }) => {
       }
     }
 
-    const handleLogoutRoot = () => {
-      if (currentUser || client) {
-        // localStorage.removeItem('authToken')
-        createCookie('authToken', '', -1);
-        sessionStorage.removeItem('authToken')
-        client.writeData({ data: { isLoggedIn: false } })
-        navigate("/?message=" + errorMessage )
-      }
-    }
+    // const handleLogoutRoot = () => {
+    //   if (currentUser || client) {
+    //     // localStorage.removeItem('authToken')
+    //     createCookie('authToken', '', -1);
+    //     sessionStorage.removeItem('authToken')
+    //     client.writeData({ data: { isLoggedIn: false } })
+    //     navigate("/?message=" + errorMessage )
+    //   }
+    // }
 
     const handleNotLoggedInRoot = () => {
       if (currentUser || client) {
@@ -123,13 +123,13 @@ const Error = ({ classes, error, client, currentUser }) => {
       handleUndefinedRoot()
     }
 
-    if (error.message.toString().includes("Signature has expired")) {
-      handleLogoutRoot()
-    }
+    // if (error.message.toString().includes("Signature has expired")) {
+    //   handleLogoutRoot()
+    // }
     
     if (error.message.toString().includes("Signature has expired")) {
       handleLogout()
-      handleLogoutRoot()
+      // handleLogoutRoot()
       return (<Snackbar 
         message={error.message}
         open={open}

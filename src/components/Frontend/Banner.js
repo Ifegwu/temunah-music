@@ -60,7 +60,9 @@ const HeroGroup = styled.div`
         animation-duration: 3s;
         animation-delay: 0.1s;
         animation-fill-mode: forwards;
-        animation-timing-function: cubic-bezier(0.07, 0.8, 0.2, 1)
+        animation-timing-function: cubic-bezier(0.07, 0.8, 0.2, 1);
+
+        padding: auto auto
 
     }
     h3 {
@@ -72,7 +74,8 @@ const HeroGroup = styled.div`
         color: rgb(255,255,255, 0.8);
         animation: HeroAnimation 3s 0.2s forwards cubic-bezier(0.07, 0.8, 0.2, 1); 
         opacity: 0;
-        padding-bottom: 4px;
+        padding-bottom: 8px;
+        padding: auto auto
     }
     /* p {
         color: #FFFFFF;
@@ -91,9 +94,13 @@ const HeroGroup = styled.div`
     @media ${device.mobileB} {
         h1 {
             font-size: 40px;
+            padding: auto auto;
+            padding-bottom: 8px;
         }
         p {
             font-size: 24px;
+            padding: auto auto;
+            padding-bottom: 8px;
         }
     }
 
@@ -142,30 +149,23 @@ export default function Banner() {
         <StaticQuery
             query={bannerQuery}
             render={data => (
-                <>
-                    <Hero>
+                <Hero>
                         <HeroGroup>                   
                             <BannerContainer>
                                 <BannerContent>
                                     <h1>Temunah Music</h1>
                                     <h3>Promoting Musical Talents</h3>
-                                    {/* <p>
-                                        Our commitment will take your musical career to the next level.
-                                    </p> */}
-                                    <h1>
-                                        <ModelComponent>Watch Demo</ModelComponent> 
-                                    </h1>
+                                    <p>
+                                       <ModelComponent>Watch Demo</ModelComponent>
+                                    </p>
                                 </BannerContent>
-                                <>
-                                    <Img fluid={data.image.childImageSharp.fluid} /> 
-                                </>
+                                <Img fluid={data.image.childImageSharp.fluid} /> 
                             </BannerContainer>
                         </HeroGroup>
                         <Wave>
                             <Waves />
                         </Wave>
                     </Hero>
-                </>
             )} 
         />
     )  

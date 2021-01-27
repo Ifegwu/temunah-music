@@ -55,7 +55,7 @@ const Login = ({ classes, setNewUser }) => {
 					<Avatar  className={classes.avatar}>
 						<Lock />
 					</Avatar >
-					<Typography variant="center" color="textPrimary" variant='h5'>
+					<Typography color="textPrimary" variant='h5'>
 						Login as Existing User
 					</Typography>
 
@@ -115,16 +115,16 @@ const Login = ({ classes, setNewUser }) => {
 										</Button>
 									</div>
 									{/* Error Handling */}
-									{error && <Error error={error}/> || <p>{loginUser.message}</p>}
+									{error && <Error error={error}/>}
 								</form>
 							)
 						}}
 					</Mutation>
-						<Typography variant="center" color="textPrimary" variant='h6'>
+						<Typography color="textPrimary" variant='h6'>
 							
 							{/* <ForgotPassword /> */}
 							{/* <PasswordReset /> */}
-							<StyledLink to={`${API_URL}/api/password-reset`}>Forgot password</StyledLink>
+							<StyledLink to={`${API_URL}/password-reset`}>Forgot password</StyledLink>
 						</Typography>
 				</ThemeProvider>
 			</Paper>

@@ -15,9 +15,7 @@ import Logo from '../../assets/images/logo.svg'
 import Signout from '../Auth/Signout'
 import {ApolloConsumer}  from 'react-apollo'
 import { createCookie } from '../../utils/client'
-import { navigate } from "@reach/router";
 import Avatar from '@material-ui/core/Avatar';
-import { IconButton } from '@material-ui/core'
 
 const Profile = React.lazy(() => import('../../pages/profile'))
 const Music = React.lazy(() => import('../../pages/music'))
@@ -26,12 +24,8 @@ export const UserContext = React.createContext()
 
 const ContentStyle = styled.div`
     background: white;
-    /* padding: 2rem; */
 `
-const AvatarGrid = styled.div`
-    color: var(--naturalLight)
-    backgroun-color: var(--blueOverlay)
-`
+
 const size = {
     mobileS: '320px',
     mobileM: '375px',
@@ -61,7 +55,8 @@ const NavStyles = styled.nav`
     font-size: calc((0.002173913) * 100vw + (11.2173913043) * 1px);
     width: 100%;
     z-index: 100;
-    background: rgba(0, 0, 0,0.8);
+    /* background: rgba(0, 0, 0,0.8); */
+    box-shadow: 0px 3px 4px 1px rgba(0, 0, 0, 0.05), 0px 20px 40px rgba(0, 0, 0, 0.15);
     padding: 5px 0;
 `
 

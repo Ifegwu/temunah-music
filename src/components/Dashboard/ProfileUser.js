@@ -11,7 +11,52 @@ import theme from '../ThemeModified'
 import Error from '../Error'
 import Loading from '../Auth/Loading'
 import { format } from 'date-fns'
+import { Link } from 'gatsby'
+import styled from 'styled-components';
 
+const CardContainer = styled(Card)`
+  display: flex;
+  grid-template-columns: auto auto auto;
+  align-items: center;
+  align-self: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 18px;
+`
+const StripeButton = styled(Link)`
+    /* Auto Layout */
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 10px 10px;
+    text-decoration: none;
+    font-weight: 800;
+
+    position: relative;
+    width: 90px;
+    height: 25px;
+    left: 15px;
+
+    background: #00CFFD;
+    box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.3);
+    border-radius: 7px;
+
+    &:hover {
+        background-color: #5469d4;
+        color: white;
+    }
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+
+    /* Inside Auto Layout */
+
+    flex: none;
+    order: 2;
+    /* align-self: flex-start; */
+    flex-grow: 0;
+    margin: 0px 30px;
+`
 const ProfileUser = ({ classes }) => {
     const currentUser = useContext(UserContext)
     return (
@@ -25,14 +70,22 @@ const ProfileUser = ({ classes }) => {
               return (
                 <div className={classes.root}>
                   <ThemeProvider theme={theme}>
-                    <Card className={classes.card}>
+                    <CardContainer>
+                        {/* <Link to={'/profile'}> */}
+                          <StripeButton to={'/profile'}>
+                            Profile
+                          </StripeButton>
+                        {/* </Link> */}
                         <CardHeader
                             avatar={<Avatar>{data.user.username[0].toUpperCase()}</Avatar>}
                             title={data.user.username}
                             // subheader={`Joined ${format(data.user.dateJoined, 'MMM Do, YYYY')}`}
                             subheader={`Joined ${format(new Date(data.user.dateJoined), 'MMM dd, yyyy')}`}
                         />
-                    </Card>
+                        {/* <Link to={'/music'}>
+                          Music 
+                        </Link> */}
+                    </CardContainer>
                   </ThemeProvider>
                 </div>
               )

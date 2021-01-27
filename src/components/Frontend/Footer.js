@@ -109,7 +109,9 @@ const Card = styled.div`
 const Logo = styled(Link)`
   color: var(--naturalLight);
   text-transform: none;
+  text-decoration: none;
 `
 const H3 = styled.h3`
   color: var(--naturalLight);
+  text-decoration: none;
 `

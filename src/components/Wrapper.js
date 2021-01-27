@@ -7,7 +7,6 @@ const stripePromise = loadStripe("pk_test_NHHuUD8JPPMyl4deUNm5RVgx00cEkE9P2C");
 
 const Wrapper = () => {
   return <Elements stripe={stripePromise}>
-              {/* <CheckoutForm /> */}
               <CheckoutForm />
           </Elements>
 };

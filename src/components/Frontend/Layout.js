@@ -48,8 +48,7 @@ const Layout = ({ children, props, pageContext }) => {
 	}, [setParam, setOpenError])
 
 
-  const { nodes, totalCount } = HomeQuery();
-  // console.log(totalCount)
+  const { nodes } = HomeQuery();
   const artists = nodes;
 
   return (

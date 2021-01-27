@@ -4,31 +4,9 @@ import Img from 'gatsby-image'
 import { StaticQuery, graphql } from 'gatsby'
 import withStyles from "@material-ui/core/styles/withStyles"
 import { Divider } from '@material-ui/core'
-import ContactForm from '../components/ContactForm'
 import MessageSuccess from '../components/MessageSuccess'
 import Layout from '../components/Frontend/Layout'
-
-// const CardBg = styled.div`
-//     width: 300px;
-//     height: 170px;
-//     position: relative;
-//     overflow: hidden;
-//     border-radius: 15px;
-//     box-shadow: 0 20px 40px rgba(0, 0, 0, 0, 0.25);
-//     display: grid;
-//     grid-template-rows: 1fr 1fr;
-//     transition: 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
-//     padding-top: 6px;
-// `
-
-// const CardGroup = styled.div`
-//     margin: 50px 40px 100px;
-//     display: grid;
-//     grid-template-columns: repeat(3, 1fr);
-//     grid-gap: 40px;
-//     justify-content: center;
-//     justify-items: center;
-// `
+import ContactUs from '../components/Frontend/ContactUs'
 
 const contactQuery = graphql`
   query contactQuery{
@@ -43,21 +21,6 @@ const contactQuery = graphql`
     }
   }
 `
-// const H2 = styled.h2`
-//     color: rgba(0, 0, 0, 0.8);
-//     font-weight: 800;
-//     transform-style: "uppercase";
-// `
-
-// const H4 = styled.h4``
-
-// export function Card({children, ...props}) {
-//     return <div className="Card">
-//         <img src={props.image} />
-//         <H2>{props.title}</H2>
-//         <H4>{children}</H4>   
-//     </div>
-// }
 
 const Contact = ({ classes }) => {
   
@@ -76,44 +39,26 @@ const Contact = ({ classes }) => {
   return (
       <Layout>
             <StaticQuery
-                query={contactQuery}
-        
+                query={contactQuery}      
                 render={data => (
-                <div>
-                    <div className={classes.root}>
-                        {messageSent ? (
-                        sentTransition.map(
-                            ({ item, key, props }) =>
-                            item && (
-                                <animated.div style={props} key={key}>
-                                <Img fluid={data.image.childImageSharp.fluid} />
-                                <Divider />
-                                <MessageSuccess />
-                                </animated.div>
-                            )
-                        )
-                        ) : (
-                        <ContactForm setMessageSent={setMessageSent} />
-                        )}
-                    </div>
-                    
-                    {/* <CardBg>
-                        <p className="">
-                            Our Services
-                        </p>
-                        <CardGroup> 
-                            {data.allMarkdownRemark.edges.map(({ node }) => (
-                            <Card 
-                                title={node.frontmatter.title}  
-                                image={require('../assets/images/component2.png')} 
-                                key={node.frontmatter.path}
-                            >        
-                                <div dangerouslySetInnerHTML={{ __html: node.html }}></div>
-                            </Card>
-                            ))}
-                        </CardGroup>
-                    </CardBg> */}
-                </div> 
+                  <div>
+                      <div className={classes.root}>
+                          {messageSent ? (
+                          sentTransition.map(
+                              ({ item, key, props }) =>
+                              item && (
+                                  <animated.div style={props} key={key}>
+                                  <Img fluid={data.image.childImageSharp.fluid} />
+                                  <Divider />
+                                  <MessageSuccess />
+                                  </animated.div>
+                              )
+                          )
+                          ) : (
+                          <ContactUs setMessageSent={setMessageSent} />
+                          )}
+                      </div>
+                  </div> 
                 )}
             />
       </Layout>

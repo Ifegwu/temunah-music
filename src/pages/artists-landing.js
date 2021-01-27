@@ -151,7 +151,7 @@ const SocialAndContact = styled.div`
   justify-items: center;
   justify-content: center;
   padding-top: 8px;
-  padding-button: 8px;
+  padding-bottom: 8px;
   font-weight: 400
 `
 const PromotionContainer = styled.div`
@@ -161,9 +161,9 @@ const PromotionContainer = styled.div`
   justify-items: center;
   justify-content: center;
   padding: 8px;
-  font-weight: 400
+  font-weight: 400;
   padding-top: 8px;
-  padding-button: 8px;
+  padding-bottom: 8px;
   transition: 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
   &:hover {
     transform: scale(1.1, 1.1);
@@ -171,14 +171,14 @@ const PromotionContainer = styled.div`
 `
 const PhoneAndEmail = styled.div`
   display: grid;
-  grid-template-rows: 1fr 1fr
+  grid-template-rows: 1fr 1fr;
   align-items: center;
   justify-items: center;
   justify-content: center;
   padding: 8px;
-  font-weight: 400
+  font-weight: 400;
   padding-top: 8px;
-  padding-button: 8px;
+  padding-bottom: 8px;
   transition: 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
   &:hover {
     transform: scale(1.1, 1.1);
@@ -192,11 +192,19 @@ const ArtistLanding = () => {
     const [param, setParam] = useState(false)
     
     const location = useLocation()
-	
+
+    const handleScroll = () => {
+      const scrollTop = window.pageYOffset
+      if(scrollTop > 50) {
+        setHasScrolled(!hasScrolled)
+      } else {
+        setHasScrolled(hasScrolled)
+      }
+    }
+
     useEffect(() => {
       const searchParams = parse(location.search)
       setParam(searchParams)
-      // console.log(searchParams.message)
       
       if(openError){
           setTimeout(() => {
@@ -207,15 +215,6 @@ const ArtistLanding = () => {
         handleScroll
       )
     }, [setParam, setOpenError])
-
-    const handleScroll = (event) => {
-      const scrollTop = window.pageYOffset
-      if(scrollTop > 50) {
-        setHasScrolled(!hasScrolled)
-      } else {
-        setHasScrolled(hasScrolled)
-      }
-    }
 
     const artists = useContext(UserContext)
 

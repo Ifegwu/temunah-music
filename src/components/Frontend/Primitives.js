@@ -268,7 +268,7 @@ export const TagResourceContainer = styled.div`
   /* margin-right: 30px; */
   box-shadow: var(--boxShadow);
   transition: all 0.25s linear;
-  background-color: var(--greyPalette);
+  background-color: var(--secondary2);
 `
 
 export const TagContainer = styled.div`

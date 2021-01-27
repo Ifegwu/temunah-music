@@ -58,7 +58,8 @@ const Typo = createGlobalStyle`
   }
 
   .header-scroll {
-    background: rgba(0, 0, 0,0.8);
+    box-shadow: 0px 3px 4px 1px rgba(0, 0, 0, 0.05), 0px 20px 40px rgba(0, 0, 0, 0.15);
+    /* background: rgba(0, 0, 0,0.8); */
     padding: 15px 0;
   }
 `;

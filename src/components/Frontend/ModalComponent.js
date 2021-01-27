@@ -1,11 +1,10 @@
 import React, { useState } from "react"
 import withStyles from "@material-ui/core/styles/withStyles";
 import Dialog from "@material-ui/core/Dialog";
-// import DialogActions from "@material-ui/core/DialogActions";
-// import DialogContent from "@material-ui/core/DialogContent";
 import Button from "@material-ui/core/Button";
 import MuiDialogContent from "@material-ui/core/DialogContent";
 import MuiDialogActions from "@material-ui/core/DialogActions";
+import ReactPlayer from 'react-player'
 
 const DialogContent = withStyles(theme => ({
   root: {
@@ -34,10 +33,12 @@ const WatchVedio = ({ classes, children }) => {
         <Dialog open={open} className={classes.dialog}>
             <form>
               <DialogContent>
-                        <Video
-                            videoSrcURL="https://www.youtube.com/embed/3sFzls0qY98"
-                            videoTitle="Official Music Video on YouTube"
-                        />            
+                        <ReactPlayer 
+                          url='https://www.youtube.com/watch?v=3sFzls0qY98' 
+                          playing 
+                          height="250" 
+                          width="250px"
+                        />
               </DialogContent>
               <DialogActions>
                 <Button
@@ -52,19 +53,6 @@ const WatchVedio = ({ classes, children }) => {
     </>
   );
 };
-
-const Video = ({ videoSrcURL, videoTitle, classes }) => (
-    <iframe
-        src={videoSrcURL}
-        title={videoTitle}
-        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-        frameBorder="0"
-        webkitallowfullscreen="true"
-        mozallowfullscreen="true"
-        allowFullScreen
-    />
-)
-
 
 const styles = theme => ({
   container: {
@@ -82,7 +70,8 @@ const styles = theme => ({
     margin: theme.spacing(1)
   },
   cancel: {
-    color: "red"
+    color: "000000",
+    background: "#00CFFD",
   },
   button: {
     margin: theme.spacing(1),

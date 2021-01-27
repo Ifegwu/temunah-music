@@ -3,13 +3,12 @@ import fetch from 'isomorphic-fetch';
 import { ApolloProvider, Query } from 'react-apollo';
 import ApolloClient, { gql }  from 'apollo-boost'
 import Root from '../root'
-// import Landing from '../pages';
 
 export function createCookie(key, value, exp) {
   var date = new Date();
   date.setTime(date.getTime() + (exp * 24 * 60 * 60 * 1000));
   var expires = "; expires=" + date.toGMTString();
-  document.cookie = key + "=" + value + expires + "; path=/"; 
+  document.cookie = key + "=" + value + expires + "; path=/";
 }
   
 export function readCookie(key) {
