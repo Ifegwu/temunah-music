@@ -18,7 +18,7 @@ import {
     Slide
 } from "@material-ui/core";
 import withStyles from "@material-ui/core/styles/withStyles";
-import theme from '../ThemeModified'
+import theme from '../../styles/ThemeModified'
 import { VerifiedUserTwoTone } from "@material-ui/icons";
 
 const Transition = React.forwardRef((props, ref) => <Slide direction="up" {...props} ref={ref}/>)

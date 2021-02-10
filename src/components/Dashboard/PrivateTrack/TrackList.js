@@ -9,7 +9,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Avatar from '@material-ui/core/Avatar';
 import Grid from '@material-ui/core/Grid';
 import { ThemeProvider } from '@material-ui/core';
-import theme from '../../ThemeModified'
+import theme from '../../../styles/ThemeModified'
 
 import { Link } from 'gatsby'
 import styled from 'styled-components'
@@ -27,8 +27,8 @@ const AvatarLikedTracks = styled.div`
   justify-items: center;
   justify-content: center;
   padding-top: 8px;
-  padding-button: 8px;
-  font-weight: 400
+  padding-bottom: 8px;
+  font-weight: 400;
 
   @media ${device.mobileM} {
     display: flex;
@@ -73,16 +73,27 @@ const AvatarLikedTracks = styled.div`
 `
 const GridStyle = styled.div`
   display: grid;
-  grid-template-rows: 1fr 1fr
+  grid-template-rows: 1fr 1fr;
   align-items: left;
   justify-items: left;
   justify-content: left;
   padding: 1rem;
 `
 const LikedStyle = styled.div`
-  paddind-right: 4px;
-  paddind-left: 4px;
+  padding-right: 4px;
+  padding-left: 4px;
   margin: 4px;
+`
+const Pre = styled.pre`
+  display: flex;
+  grid-template-columns: auto;
+  padding: 4px;
+  font-family: inherit;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  justify-self: center;
+  justify-items: center;
 `
 const TrackList = ({ classes, tracks, currentUser }) => (
   <ThemeProvider theme={theme}>
@@ -118,11 +129,15 @@ const TrackList = ({ classes, tracks, currentUser }) => (
                   <AudioPlayer url={track.url} />
                 </LikedStyle>
               </AvatarLikedTracks>
-          </ListItem>
-        </AccordionSummary>
-        <AccordionDetails className={classes.detail}>
-          <Typography variant="body1">{track.description}</Typography>
-        </AccordionDetails>
+            </ListItem>
+          </AccordionSummary>
+          <AccordionDetails className={classes.detail}>
+            <Pre> 
+              <Typography variant="body1">
+                {track.description}
+              </Typography>
+            </Pre>
+          </AccordionDetails>
           <AccordionActions>
             <UpdateTrack track={track} />
             <DeleteTrack track={track} />

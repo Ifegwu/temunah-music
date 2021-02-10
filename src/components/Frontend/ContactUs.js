@@ -9,7 +9,7 @@ import contactus from '../../assets/images/contactus.gif';
 import styled from 'styled-components';
 import { Container } from './Primitives'
 import { FormHelperText, ThemeProvider } from '@material-ui/core';
-import theme from '../ThemeModified'
+import theme from '../../styles/ThemeModified'
 import { Mutation } from 'react-apollo';
 import isEmail from 'isemail'
 import Error from '../Error'
@@ -62,9 +62,7 @@ const ContactUs = ({ setMessageSent, classes }) => {
         .then(res => {
           if (res.ok) {
             // clearForm()
-            setEmail("")
-            setName("")
-            setMessage("")
+            clearForm()
             setSubmitting(true)
             setMessageSent(true)
           } else {
@@ -79,6 +77,12 @@ const ContactUs = ({ setMessageSent, classes }) => {
         })
         .catch(error => alert(error))
     }
+  }
+
+  const clearForm = () => {
+    setName("")
+    setEmail("")
+    setMessage("")
   }
   
   return (
@@ -118,6 +122,9 @@ const ContactUs = ({ setMessageSent, classes }) => {
                                 placeholder="Your Name"
                                 required 
                                 onChange={event => setName(event.target.value)}
+                                inputProps={
+                                  {maxLength: 60}
+                                }
                               />
                           </FormControl>
                           <FormControl margin="normal" required fullWidth>
@@ -130,6 +137,9 @@ const ContactUs = ({ setMessageSent, classes }) => {
                                 placeholder="you@youremail.com"
                                 required 
                                 onChange={event => setEmail(event.target.value)}
+                                inputProps={
+                                  {maxLength: 50}
+                                }
                               />
                               <FormHelperText>{fileError}</FormHelperText>
                           </FormControl>
@@ -144,6 +154,7 @@ const ContactUs = ({ setMessageSent, classes }) => {
                                   required 
                                   aria-label="maximum height"
                                   placeholder="Your Message Here"
+                                  maxLength="200"
                               />
                               <FormHelperText>{fileError}</FormHelperText>
                           </FormControl>
@@ -161,6 +172,7 @@ const ContactUs = ({ setMessageSent, classes }) => {
                                   className={classes.button}
                                   color="secondary"
                                   variant="contained"
+                                  onClick={clearForm}
                               >
                                   Clear
                               </Button>

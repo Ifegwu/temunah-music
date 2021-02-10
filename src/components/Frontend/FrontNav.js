@@ -5,6 +5,7 @@ import Logo from '../../assets/images/logo.svg'
 
 
 const size = {
+    mobileXS: '280px',
     mobileS: '320px',
     mobileM: '375px',
     mobileL: '425px',
@@ -16,9 +17,11 @@ const size = {
 }
 
 export const device = {
+    mobileXS: `(min-width: ${size.mobileXS})`,
     mobileS: `(min-width: ${size.mobileS})`,
     mobileM: `(min-width: ${size.mobileM})`,
     mobileL: `(min-width: ${size.mobileL})`,
+    mobileB: `(min-width: ${size.mobileB})`,
     tablet: `(min-width: ${size.tablet})`,
     laptop: `(min-width: ${size.laptop})`,
     laptopL: `(min-width: ${size.laptopL})`,

@@ -45,7 +45,7 @@ export const client = new ApolloClient({
   }
 });
 
-const IS_LOGGED_IN_QUERY = gql`
+export const IS_LOGGED_IN_QUERY = gql`
   query {
     isLoggedIn @client
   }

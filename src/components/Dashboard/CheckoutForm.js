@@ -22,7 +22,7 @@ import {
     Slide
 } from "@material-ui/core";
 import withStyles from "@material-ui/core/styles/withStyles";
-import theme from '../ThemeModified'
+import theme from '../../styles/ThemeModified'
 import { UserContext } from './Layout'
 import styled from 'styled-components';
 import { VerifiedUserTwoTone } from "@material-ui/icons";
@@ -34,6 +34,7 @@ const StripeButton = styled(Button)`
     flex-direction: row;
     align-items: flex-start;
     padding: 10px 30px;
+    font-family: "Poppins", sans-serif;
 
     position: static;
     width: 250px;
@@ -125,7 +126,6 @@ const CheckoutForm = ({ classes }) => {
             type: 'card',
             card: card
         });
-        console.log(paymentMethod)
         if (error) {
             setError(error.response.data)
         }
@@ -142,12 +142,10 @@ const CheckoutForm = ({ classes }) => {
                     paymentMethodId: paymentMethod.id
                 }
             }).then(response => {
-                console.log(response.data);
                 setSubmitting(true);
                 setOpenSuccess(true)
                 setOpenError(false)
             }).catch(error => {
-                console.log(error)
             });
             setEmail('')
             setSubmitting(false)
@@ -158,7 +156,7 @@ const CheckoutForm = ({ classes }) => {
 
 
     return (
-        <>
+        <div className={classes.root}>
                 {/* <IconButton onClick={() => setOpen(true)}> */}
                 <StripeButton onClick={() => setOpen(true)}>
                         <PaymentIcon
@@ -279,11 +277,14 @@ const CheckoutForm = ({ classes }) => {
                     </DialogContent>
                 </ThemeProvider>
             </Dialog>
-        </>
+        </div>
     );
 };
 
 const styles = theme => ({
+    root: {
+        fontFamily: "sans-serif, Poppins"
+    },
     container: {
       display: "flex",
       flexWrap: "wrap"

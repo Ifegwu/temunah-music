@@ -10,19 +10,16 @@ import { UserContext } from '../Layout';
 
 const LikeTrack = ({ classes, trackId, likeCount  }) => {
   const currentUser = useContext(UserContext)
-  console.log({ currentUser })
   const handleDisabledLikedTrack = () => {
-    console.log({currentUser})
-    // const userLikes = currentUser.likeSet
-    // const isTrackLiked = userLikes.findIndex(({ track }) => track.id === trackId) > -1
-    // return isTrackLiked
+    const userLikes = currentUser.likeSet
+    const isTrackLiked = userLikes.findIndex(({ track }) => track.id === trackId) > -1
+    return isTrackLiked
   }
   return (
     <Mutation 
       mutation={CREATE_LIKE_MUTATION}
       variables={{ trackId }}
       onCompleted={data => {
-        console.log({ data })
       }}
       refetchQueries={() => [{ query: ME_QUERY}]}
     >

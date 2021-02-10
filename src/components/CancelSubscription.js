@@ -23,7 +23,7 @@ import {
     Slide
 } from "@material-ui/core";
 import withStyles from "@material-ui/core/styles/withStyles";
-import theme from './ThemeModified'
+import theme from '../styles/ThemeModified'
 
 const Transition = React.forwardRef((props, ref) => <Slide direction="up" {...props} ref={ref}/>)
 
@@ -61,11 +61,9 @@ const CancelSubscription = ({ classes }) => {
                     email
                 }
             }).then(response => {
-                    console.log(response.data);
                     setSubmitting(true)
                     setOpenSuccess(true)
                 }).catch(error => {
-                    console.log(error)
                     setFileError(`Something went wrong!`)
             });
             setEmail('')

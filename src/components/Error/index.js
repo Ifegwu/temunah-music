@@ -6,7 +6,7 @@ import Button from "@material-ui/core/Button";
 import Snackbar from "@material-ui/core/Snackbar";
 import { createCookie } from "../../utils/client";
 import { ThemeProvider } from "styled-components";
-import theme from "../ThemeModified";
+import theme from "../../styles/ThemeModified";
 
 
 const Error = ({ classes, error, client, currentUser }) => {
@@ -87,7 +87,7 @@ const Error = ({ classes, error, client, currentUser }) => {
         createCookie('authToken', '', -1);
         sessionStorage.removeItem('authToken')
         client.writeData({ data: { isLoggedIn: false } })
-        navigate("/?message=" + errorNotLoggedIn )
+        navigate("/app/login?message=" + errorNotLoggedIn )
       }
     }
 

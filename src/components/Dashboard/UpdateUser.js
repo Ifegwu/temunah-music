@@ -4,7 +4,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import SettingsIcon from '@material-ui/icons/Settings';
 import { ApolloConsumer, Mutation } from "react-apollo"
 import { ThemeProvider } from '@material-ui/core'
-import theme from '../ThemeModified'
+import theme from '../../styles/ThemeModified'
 
 import Error from '../Error'
 import { 
@@ -33,10 +33,8 @@ const UpdateUser = ({ classes  }) => {
     const [password, setPassword] = useState("")
     const [fileError, setFileError] = useState("")
 
-    // console.log({ currentUser })
     const handleSubmit = async (event, updateUser, client) => {
         event.preventDefault()
-        console.log({updateUser})
         if (updateUser.id && updateUser.length !== currentUser.id || currentUser.email !== email) {
             setFileError(`Current user info does not match ${currentUser.email}`)
         } else {
@@ -48,7 +46,6 @@ const UpdateUser = ({ classes  }) => {
                 password
     
             }})
-            // console.log({ updateUser })
             setFileError("")
         }
     }
@@ -63,7 +60,6 @@ const UpdateUser = ({ classes  }) => {
             <Mutation
                 mutation={UPDATE_PROFILE}
                 onCompleted={data => {
-                    // console.log(data)
                     setSubmitting(false)
                     setOpen(false)
                     setUsername("")
@@ -73,7 +69,6 @@ const UpdateUser = ({ classes  }) => {
                 // update={handleUpdateCache}
             >
                 {(updateUser, { loading, error }) => {
-                    // console.log(updateUser)
                     if (error) return <Error error={error} />
                     
                     return (

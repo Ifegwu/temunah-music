@@ -2,6 +2,7 @@ import styled from "styled-components"
 import { Link } from "gatsby"
 
 const size = {
+  mobileXS: "280px",
   mobileS: "320px",
   mobileM: "375px",
   mobileL: "425px",
@@ -12,6 +13,7 @@ const size = {
 }
 
 export const deviceMin = {
+  mobileXS: `(min-width: ${size.mobileXS})`,
   mobileS: `(min-width: ${size.mobileS})`,
   mobileM: `(min-width: ${size.mobileM})`,
   mobileL: `(min-width: ${size.mobileL})`,
@@ -23,6 +25,7 @@ export const deviceMin = {
 }
 
 export const deviceMax = {
+  mobileXS: `(max-width: ${size.mobileXS})`,
   mobileS: `(max-width: ${size.mobileS})`,
   mobileM: `(max-width: ${size.mobileM})`,
   mobileL: `(max-width: ${size.mobileL})`,

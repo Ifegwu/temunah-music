@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useContext } from "react"
 import { Mutation } from "react-apollo"
 import { gql } from "apollo-boost"
 import axios from 'axios'
@@ -20,13 +20,13 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 
 import Error from '../../Error'
-import { GET_TRACKS_QUERY } from '../../../pages/music'
-// import { UserContext } from '../Layout';
+import { GET_TRACKS_QUERY } from '../DashboardComponent'
+import { UserContext } from '../Layout';
 import { LinearProgress, ThemeProvider } from "@material-ui/core";
-import theme from '../../ThemeModified'
+import theme from '../../../styles/ThemeModified'
 
 const UpdateTrack = ({ classes, track }) => {
-  // const currentUser = useContext(UserContext)
+  const currentUser = useContext(UserContext)
   const [open, setOpen] =  useState(false)
   const [title, setTitle] =  useState(track.title)
   const [description, setDescription] =  useState(track.description)
@@ -34,8 +34,9 @@ const UpdateTrack = ({ classes, track }) => {
   const [imageFile, setImageFile] = useState("")
   const [submitting, setSubmitting] = useState(false)
   const [fileError, setFileError] = useState("")
-  console.log(track.postedBy.id)
-  const isCurrentUser = track.id === track.postedBy.id
+  
+  // const isCurrentUser = track.id === track.postedBy.id
+  const isPresentUser = currentUser ? currentUser.id === track.postedBy.id : null
 
   const handleAudioChange = event => {
     event.preventDefault()
@@ -72,7 +73,6 @@ const UpdateTrack = ({ classes, track }) => {
       
       return res.data.url
     } catch(err) {
-      console.error('Error uploading file', err)
       setSubmitting(false)
     }
   }
@@ -88,7 +88,6 @@ const UpdateTrack = ({ classes, track }) => {
       
       return res.data.url
     } catch(err) {
-      console.error('Error uploading file', err)
       setSubmitting(false)
     }
   }
@@ -109,13 +108,13 @@ const UpdateTrack = ({ classes, track }) => {
                 })
   }
 
-  const handleUpdateCache = (cache, { data: {createTrack} }) => {
-    const data = cache.readQuery({ query: GET_TRACKS_QUERY })
-    const tracks = data.tracks.concat(createTrack.track)
+  const handleUpdateCache = async (cache, { data: {createTrack} }) => {
+    const data = await cache.readQuery({ query: GET_TRACKS_QUERY })
+    const tracks = await data.tracks.concat(createTrack.track)
     cache.writeQuery({ query: GET_TRACKS_QUERY, data: { tracks} })
   }
 
-  return isCurrentUser && (
+  return isPresentUser ? (
     <>
       {/* Update Track Button */}
     
@@ -127,7 +126,6 @@ const UpdateTrack = ({ classes, track }) => {
     <Mutation 
       mutation={UPDATE_TRACK_MUTATION}
       onCompleted={data => {
-        console.log(data)
         setSubmitting(false)
         setOpen(false)
         setTitle("")
@@ -246,7 +244,7 @@ const UpdateTrack = ({ classes, track }) => {
       }}
     </Mutation>
     </>
-  );
+  ) : null;
 };
 
 const UPDATE_TRACK_MUTATION = gql`

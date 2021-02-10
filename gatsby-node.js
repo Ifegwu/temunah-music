@@ -101,9 +101,6 @@ async function advertPageCreation({ graphql, actions }) {
 }
 
 exports.createPages = async (params) => {
-    // console.log("CREATING PAGESSSSSSSSSSSSSSSSSSSSSSSSSSSS");
-    // console.log("CREATING PAGESSSSSSSSSSSSSSSSSSSSSSSSSSSS");
-    // console.log("CREATING PAGESSSSSSSSSSSSSSSSSSSSSSSSSSSS");
     // Create pages synamically
     // 1. Posts
     await Promise.all([

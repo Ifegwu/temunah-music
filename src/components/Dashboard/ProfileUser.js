@@ -1,5 +1,5 @@
-import React, { useContext } from 'react'
-import { PROFILE_QUERY } from '../../pages/profile'
+import React, { useContext, useEffect } from 'react'
+import { PROFILE_QUERY } from './Profile'
 import { Query } from 'react-apollo'
 import { UserContext } from './Layout';
 import { ThemeProvider } from '@material-ui/core';
@@ -7,7 +7,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import Avatar from "@material-ui/core/Avatar";
-import theme from '../ThemeModified'
+import theme from '../../styles/ThemeModified'
 import Error from '../Error'
 import Loading from '../Auth/Loading'
 import { format } from 'date-fns'
@@ -58,33 +58,29 @@ const StripeButton = styled(Link)`
     margin: 0px 30px;
 `
 const ProfileUser = ({ classes }) => {
-    const currentUser = useContext(UserContext)
+  
+  const currentUser = useContext(UserContext)
+
     return (
         <Query query={PROFILE_QUERY} variables={ currentUser }>
             {({ data, loading, error }) => {
               
               if (loading) return <Loading />
               if (error) return <Error error={error} />
-              console.log(data.user.id)
 
               return (
                 <div className={classes.root}>
                   <ThemeProvider theme={theme}>
                     <CardContainer>
-                        {/* <Link to={'/profile'}> */}
-                          <StripeButton to={'/profile'}>
-                            Profile
-                          </StripeButton>
-                        {/* </Link> */}
+                        <StripeButton to={'/app/profile'}>
+                          Profile
+                        </StripeButton>
                         <CardHeader
                             avatar={<Avatar>{data.user.username[0].toUpperCase()}</Avatar>}
                             title={data.user.username}
                             // subheader={`Joined ${format(data.user.dateJoined, 'MMM Do, YYYY')}`}
                             subheader={`Joined ${format(new Date(data.user.dateJoined), 'MMM dd, yyyy')}`}
                         />
-                        {/* <Link to={'/music'}>
-                          Music 
-                        </Link> */}
                     </CardContainer>
                   </ThemeProvider>
                 </div>

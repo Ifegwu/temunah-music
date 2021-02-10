@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'gatsby'
 import Img from 'gatsby-image'
 import styled  from 'styled-components'
@@ -62,6 +62,10 @@ const H2Modified = styled(H2)`
 `
 
 function SingleArtist ({ artist }) {
+
+    useEffect(() => {
+        
+    }, [artist])
 
     return (
         <>

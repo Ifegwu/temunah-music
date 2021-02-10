@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Router, useLocation } from '@reach/router'
 import { parse } from "query-string"
-import { graphql, useStaticQuery } from "gatsby";
+import { graphql, useStaticQuery, withPrefix } from "gatsby";
 import styled from 'styled-components';
 import { Snackbar } from '@material-ui/core';
 import 'normalize.css';
@@ -10,7 +10,10 @@ import Footer from './Footer';
 import GlobalStyles from '../../styles/GlobalStyles';
 import Typography from '../../styles/Typography';
 import ArtistLanding from '../../pages/artists-landing';
-// import IndexPage from '../../pages';
+import Loading from '../Auth/Loading'
+
+const ContactMe = React.lazy(() => import('../../pages/contactme'))
+const Authenticate = React.lazy(() => import('../Auth/Authenticate'))
 
 export const UserContext = React.createContext()
 
@@ -19,18 +22,15 @@ const ContentStyles = styled.div`
   background: white;
   /* padding: 2rem; */
 `;
-
-// const Authenticate = React.lazy(() => import('../../pages/auth'))
-// const Contact = React.lazy(() => import('../../pages/contact'))
 // const ArtistsPage = React.lazy(() => import('../../pages/artists'))
 
-// const LazyComponent = ({ Component, ...props }) => (
-//     <React.Suspense fallback={'<p>Loading...</p>'}>
-//       <Component {...props} />
-//     </React.Suspense>
-// );
+const LazyComponent = ({ Component, ...props }) => (
+    <React.Suspense fallback={<Loading />}>
+      <Component {...props} />
+    </React.Suspense>
+);
 
-const Layout = ({ children, props, pageContext }) => {
+const Layout = ({ children, props }) => {
   const [openError, setOpenError] = useState(true)
   const [param, setParam] = useState(false)
 
@@ -57,8 +57,10 @@ const Layout = ({ children, props, pageContext }) => {
       <Typography />
         <ContentStyles>
           <FrontNav />
-          <Router>
+          <Router basepath={withPrefix("/")} >
             <ArtistLanding path="/" />
+            <LazyComponent exact Component={Authenticate} path="/auth" />
+            <LazyComponent exact Component={ContactMe} path="/contact" />
           </Router>
           {
             param.message && <Snackbar message={param.message} open={openError} autoHideDuration={6000} />

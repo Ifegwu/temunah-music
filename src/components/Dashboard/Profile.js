@@ -1,10 +1,10 @@
 import React, { useContext } from 'react'
 // import { UserContext } from '../Root'
-import { UserContext } from '../components/Dashboard/Layout';
+import { UserContext } from './Layout';
 import { Query } from 'react-apollo'
 import { gql } from 'apollo-boost'
-import Updateuser from '../components/Dashboard/UpdateUser';
-import  CreateTrack from '../components/Dashboard/PrivateTrack/CreateTrack'
+import Updateuser from './UpdateUser';
+import  CreateTrack from './PrivateTrack/CreateTrack'
 
 import withStyles from "@material-ui/core/styles/withStyles";
 import Card from "@material-ui/core/Card";
@@ -19,13 +19,13 @@ import Divider from "@material-ui/core/Divider";
 import { ThemeProvider } from '@material-ui/core'
 import { Link } from 'gatsby'
 
-import AudioPlayer from "../components/Dashboard/PrivateTrack/AudioPlayer"
-import Error from '../components/Error'
-import Loading from '../components/Auth/Loading'
+import AudioPlayer from "./PrivateTrack/AudioPlayer"
+import Error from '../Error'
+import Loading from '../Auth/Loading'
 import { format } from 'date-fns'
-import theme from '../components/ThemeModified'
+import theme from '../../styles/ThemeModified'
 import styled from 'styled-components'
-import CancelSubscription from '../components/CancelSubscription';
+import CancelSubscription from '../CancelSubscription';
 
 const CardContainer = styled(Card)`
   display: flex;
@@ -98,14 +98,12 @@ const StripeButton = styled(Link)`
        
 const Profile = ({ classes }) => {
   const currentUser = useContext(UserContext)
-  console.log(currentUser)
   return (
     <Query query={PROFILE_QUERY} variables={ currentUser }>
         {({ data, loading, error }) => {
           
           if (loading) return <Loading />
           if (error) return <Error error={error} />
-          console.log(data.user.id)
           
           return (
             <div className={classes.root}>
@@ -114,16 +112,12 @@ const Profile = ({ classes }) => {
                 {/* User Info Card */}
                 <CreateTrack />
                 <CardContainer className={classes.card}>
-                  {/* <Link to={"/profile"}>
-                    Profile
-                  </Link> */}
                   <CardHeader
                     avatar={<Avatar>{data.user.username[0].toUpperCase()}</Avatar>}
                     title={data.user.username}
-                    // subheader={`Joined ${format(data.user.dateJoined, 'MMM Do, YYYY')}`}
                     subheader={`Joined ${format(new Date(data.user.dateJoined), 'MMM dd, yyyy')}`}
                   />
-                  <StripeButton to={"/music"}>
+                  <StripeButton to={"/app/dashboard"}>
                     Dashboard
                   </StripeButton>
                 </CardContainer>
@@ -134,13 +128,13 @@ const Profile = ({ classes }) => {
                         <Subscriptions className={classes.audioIcon} />
                         Subscriptions
                       </Typography>
-                      {data.user && data.user.subscriptionsSet.map(track => (
-                        <div key={track.id}>
+                      {data.user && data.user.subscriptionsSet.map(subscription => (
+                        <div key={data.user.id}>
                           <Typography>
-                            {track.music} &middot; Created: {format(new Date(track.createdAt), 'MMM dd, yyyy')}
+                            {subscription.music} &middot; Created: {format(new Date(subscription.createdAt), 'MMM dd, yyyy')}
                           </Typography>
                           <Typography>
-                            Amount: N{track.fee} &middot; Expires: {format(new Date(track.createdAt), 'MMM dd, yyyy')} + 30 days
+                            Amount: N{subscription.fee} &middot; Expires: {format(new Date(subscription.createdAt), 'MMM dd, yyyy')} + 30 days
                           </Typography>
                           <Divider className={classes.divider} />
                         </div>
@@ -153,6 +147,7 @@ const Profile = ({ classes }) => {
                     <Updateuser />
                   </CardContent>
                 </Cards>
+                
                 {/* Created Tracks */}
                 <Paper elevation={1} className={classes.paper}>
                   <Typography variant="subtitle1" className={classes.title}>
@@ -176,7 +171,7 @@ const Profile = ({ classes }) => {
                       Liked Tracks
                     </Typography>
                     {data.user.likeSet.map(({ track }) => (
-                      <div key={data.user.id}>
+                      <div key={track.id}>
                         <Typography>
                           {track.title} &middot; {track.likes.length} Likes &middot; {track.postedBy.username}
                         </Typography>

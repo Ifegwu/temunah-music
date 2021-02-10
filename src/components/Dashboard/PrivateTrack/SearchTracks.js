@@ -8,7 +8,7 @@ import Paper from "@material-ui/core/Paper";
 import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
 import { ThemeProvider } from '@material-ui/core';
-import theme from '../../ThemeModified'
+import theme from '../../../styles/ThemeModified'
 
 const SearchTracks = ({ classes, setSearchResults }) => {
   const [search, setSearch] = useState("")

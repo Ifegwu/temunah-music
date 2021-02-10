@@ -5,9 +5,9 @@ const IndexPage = ({ children }) => {
 
   return (
     <Layout>
-		<>
-			{children}
-		</>
+      <>
+        {children}
+      </>
     </Layout>
   )
 }

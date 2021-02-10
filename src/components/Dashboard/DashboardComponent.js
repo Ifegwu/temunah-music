@@ -1,20 +1,21 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Query } from 'react-apollo';
 import { gql } from 'apollo-boost';
+import { UserContext } from './Layout';
 import withStyles from '@material-ui/core/styles/withStyles'
 import { Divider, ThemeProvider } from '@material-ui/core'
 import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet';
 
-import  SearchTracks from '../components/Dashboard/PrivateTrack/SearchTracks'
-import  TrackList from '../components/Dashboard/PrivateTrack/TrackList'
-import  CreateTrack from '../components/Dashboard/PrivateTrack/CreateTrack'
-import Updateuser from '../components/Dashboard/UpdateUser';
-import Loading from '../components/Auth/Loading'
-import Error from '../components/Error'
-import theme from '../components/ThemeModified'
+import  SearchTracks from './PrivateTrack/SearchTracks'
+import  TrackList from './PrivateTrack/TrackList'
+import  CreateTrack from './PrivateTrack/CreateTrack'
+import Updateuser from './UpdateUser';
+import Loading from '../Auth/Loading'
+import Error from '../Error'
+import theme from '../../styles/ThemeModified'
 import styled from 'styled-components';
-import Wrapper from '../components/Wrapper';
-import ProfileUser from '../components/Dashboard/ProfileUser';
+import Wrapper from '../Wrapper';
+import ProfileUser from './ProfileUser';
 
 const Card = styled.div`
     display: flex;
@@ -35,6 +36,7 @@ const StripeContainer = styled.div`
     padding: 4px;
     padding-top: 4px;
     padding-bottom: 4px;
+    font-family: "Poppins", sans-serif;
     /* max-width: 300px; */
     h1 {
         font-weight: 800;
@@ -82,12 +84,6 @@ const StripeAritcleOne = styled.div`
     padding: 4px 4px;
     padding-bottom: 8px;
 
-    /* position: relative;
-    width: 117px;
-    height: 73px;
-    top: 30px; */
-
-
     /* Inside Auto Layout */
     h4 {
         padding-top: 4px;
@@ -106,6 +102,7 @@ const StripeAritcleOne = styled.div`
     flex-grow: 0;
     margin: 0px 30px;
 `
+
 const StripeAritcleTwo = styled.div`
     display: flex;
     flex-direction: row;
@@ -124,6 +121,7 @@ const StripeAritcleTwo = styled.div`
     flex-grow: 0;
     margin: 0px 8px;
 `
+
 const StripeBooking = styled.div`
     position: static;
     width: 32px;
@@ -138,6 +136,7 @@ const StripeBooking = styled.div`
     flex-grow: 0;
     margin: 10px 0px;
 `
+
 const CardContent = styled.div`
     display: grid;
     grid-template-rows: 2fr 2fr;
@@ -175,6 +174,7 @@ const CardContent = styled.div`
         justify-content: center;
     }
 `
+
 export const GET_TRACKS_QUERY = gql`
     query getTracksQuery {
         tracks(first: 10, skip: 1) {
@@ -194,58 +194,59 @@ export const GET_TRACKS_QUERY = gql`
     }
     `;
 
-const Music = ({ classes }) => {
+const DashboardComponent = ({ classes }) => {
     const [searchResults, setSearchResults] = useState([])
+    const currentUser = useContext(UserContext)
     return (
-            <div className={classes.container}>
-                <ProfileUser />
-                <SearchTracks setSearchResults={setSearchResults}/>
-                <CreateTrack />
-                <Query query={GET_TRACKS_QUERY}>
+        <div className={classes.container}>
+                <Query query={GET_TRACKS_QUERY} variables={ currentUser}>
                     {({ data, loading, error }) => {
                         if (loading) return <Loading />;
                         if (error) return <Error error={error} />
-                        console.log(data.tracks)
                         
                         const tracks = searchResults.length > 0 ? searchResults : data.tracks
-                        return  <TrackList tracks={tracks} />
-                    }}
+                        return (
+                            <ThemeProvider theme={theme}>
+                                <ProfileUser />
+                                <SearchTracks setSearchResults={setSearchResults}/>
+                                <CreateTrack />
+                                <TrackList tracks={tracks} />
+                                <div>
+                                        <Card>
+                                            <StripeContainer>
+                                                <StripeCard>
+                                                    <StripeAritcleOne>
+                                                        <h2>Subscription</h2>
+                                                        <h4>N</h4><h1>5000/</h1>
+                                                        <h3>Billed Monthly</h3>
+                                                    </StripeAritcleOne>
+                                                    <Divider className={classes.divider} />
+                                                    <StripeAritcleTwo>
+                                                        <StripeBooking>
+                                                            <AccountBalanceWalletIcon
+                                                                style={{ fontSize: 40 }}
+                                                                color="primary"
+                                                            />
+                                                        </StripeBooking>
+                                                        <h3>
+                                                            This is a recurrent subscription plan. You can conviniently cancel plan at any time.
+                                                        </h3>
+                                                    </StripeAritcleTwo>
+                                                    <Divider className={classes.divider} />
+                                                    <Wrapper />
+                                                </StripeCard>
+                                            </StripeContainer>
+                                        </Card>
+                                        <Card>
+                                            <CardContent>
+                                                <h3>Settings</h3>
+                                                    <Updateuser />
+                                            </CardContent>
+                                        </Card>
+                                </div>
+                        </ThemeProvider>
+                    )}}
                 </Query>
-                <div>
-                    <ThemeProvider theme={theme}>
-                        <Card>
-                            <StripeContainer>
-                                <StripeCard>
-                                    <StripeAritcleOne>
-                                        <h2>Subscription</h2>
-                                        <h4>N</h4><h1>5000/</h1>
-                                        <h3>Billed Monthly</h3>
-                                    </StripeAritcleOne>
-                                    <Divider className={classes.divider} />
-                                    <StripeAritcleTwo>
-                                        <StripeBooking>
-                                            <AccountBalanceWalletIcon
-                                                style={{ fontSize: 40 }}
-                                                color="primary"
-                                            />
-                                        </StripeBooking>
-                                        <h3>
-                                            This is a recurrent subscription plan. You can conviniently cancel plan at any time.
-                                        </h3>
-                                    </StripeAritcleTwo>
-                                    <Divider className={classes.divider} />
-                                    <Wrapper />
-                                </StripeCard>
-                            </StripeContainer>
-                        </Card>
-                        <Card>
-                            <CardContent>
-                                <h3>Settings</h3>
-                                    <Updateuser />
-                            </CardContent>
-                        </Card>
-                    </ThemeProvider>
-                </div>
             </div>
     )
 }
@@ -264,5 +265,5 @@ const styles = theme => ({
     }
 })
 
-export default withStyles(styles)(Music)
+export default withStyles(styles)(DashboardComponent)
 

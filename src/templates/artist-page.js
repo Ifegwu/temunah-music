@@ -23,6 +23,9 @@ const H2 = styled.h2`
     font-size: 26px;
     line-height: 14px;
 `
+const H6Plus = styled(H6)`
+    padding: 8px 4px;
+`
 
 const Div = styled.div`
     padding-top: 16px;
@@ -52,10 +55,8 @@ const SocialLogo = styled.div`
       transform: var(--transform);
     }
 `
-
 const ArtistPage = ({ data }) => {
     const { artist } = data;
-    console.log(artist.name);
     return (
         <Layout>
             <>
@@ -65,11 +66,9 @@ const ArtistPage = ({ data }) => {
                         <H2 className="mark">
                             <strong>{artist.name}</strong>
                         </H2>
-                        <Div><strong>Album:</strong> {artist.albums.name}</Div>
-                        <Div>
-                            <strong>By:</strong> {artist.artist.join(', ft: ')}
-                        </Div>
-                        <H6><strong>{artist.description}</strong></H6>
+                        <H6Plus>Album: {artist.albums.name}</H6Plus>
+                        <H6Plus> By: {artist.artist.join(', ft: ')}</H6Plus>
+                        <H6Plus><strong>{artist.description}</strong></H6Plus>
                         <SocialLogo>
                             <Link to={artist.person.facebook}><FacebookSocial /></Link>
                             <Link to={artist.person.instagram}><InstagramSocial /></Link>

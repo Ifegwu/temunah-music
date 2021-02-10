@@ -8,7 +8,6 @@ import GlobalStyles from '../../styles/GlobalStyles'
 import Typo from '../../styles/Typography'
 import Loading from '../Auth/Loading';
 import Error from '../Error';
-// import Music from '../../pages/music';
 import DashboardNav from './DashboardNav'
 import Footer from './Footer'
 import Logo from '../../assets/images/logo.svg'
@@ -17,8 +16,8 @@ import {ApolloConsumer}  from 'react-apollo'
 import { createCookie } from '../../utils/client'
 import Avatar from '@material-ui/core/Avatar';
 
-const Profile = React.lazy(() => import('../../pages/profile'))
-const Music = React.lazy(() => import('../../pages/music'))
+const Profile = React.lazy(() => import('./Profile'))
+const DashboardComponent = React.lazy(() => import('./DashboardComponent'))
 
 export const UserContext = React.createContext()
 
@@ -127,8 +126,9 @@ const LogoStyle = styled.img`
 
 
 const LazyComponent = ({ Component, ...props }) => (
-    <React.Suspense fallback={'<p>Loading...</p>'}>
-      <Component {...props} />
+    <React.Suspense fallback={<Loading />}>
+        {/* <PrivateRoute {...props} /> */}
+        <Component {...props} />
     </React.Suspense>
 );
 
@@ -160,12 +160,12 @@ export default function Layout({ children, props }) {
                                         <NavGroup>
                                             <ul>
                                                 <li>
-                                                    <Link to="/music">
+                                                    <Link to="/app/dashboard">
                                                         <LogoStyle src={Logo} />
                                                     </Link>
                                                 </li>
                                                 <li>
-                                                    <Link to="/profile">
+                                                    <Link to="/app/profile">
                                                         <Avatar style={{ backgroundColor: 'var(--pink)' }}>
                                                             {currentUser.username[0].toUpperCase()}
                                                         </Avatar>
@@ -173,18 +173,18 @@ export default function Layout({ children, props }) {
                                                 </li>
                                                 <li>
                                                     <button>
-                                                        <Signout />
+                                                        <Signout currentUser={currentUser}/>
                                                     </button>
                                                 </li>                   
                                             </ul>
                                         </NavGroup>
                                     </NavStyles>
                                 </DashboardNav>
-                                <Router>
-                                    {/* <Music path="/music" /> */}
-                                    <LazyComponent Component={Music} path="music" />
-                                    <LazyComponent Component={Profile} path="profile" />
+                                <Router basepath="/app">
+                                    <LazyComponent Component={DashboardComponent} path="/dashboard" />
+                                    <LazyComponent Component={Profile} path="/profile" />
                                 </Router>
+                                {children}
                                 <Footer />
                             </ContentStyle>
                         </div>

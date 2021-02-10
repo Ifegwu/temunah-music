@@ -25,15 +25,31 @@ import AdvertList from '../components/Frontend/Adverts';
 import { useStaticQuery, graphql } from 'gatsby';
 import Musician from '../components/Frontend/Musician';
 import { Snackbar } from '@material-ui/core';
-import theme from '../components/ThemeModified'
+import theme from '../styles/ThemeModified'
+import bg from '../assets/images/twistedlines.svg';
 
 const OverlayedContainer = styled(Container)`
+  padding: 20px 20px;
+  max-width: none;
+  background-image: url(${bg});
+  /* background-color: #cccccc;  */
+  height: 1; /* You must set a specified height */
+  background-position: left; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover; /* Resize the background image to cover the entire container */
+  
+  @media ${deviceMax.mobileL} {
+    width: 100%;
+    text-align: center;
+  }
+`
+const PlayerContainer = styled(Container)`
   padding: 20px 20px;
   max-width: none;
 
   @media ${deviceMax.mobileL} {
     width: 100%;
-    text-align: center;
+    text-align: start;
   }
 `
 const Column = styled.div`
@@ -202,6 +218,8 @@ const ArtistLanding = () => {
       }
     }
 
+    const artists = useContext(UserContext)
+
     useEffect(() => {
       const searchParams = parse(location.search)
       setParam(searchParams)
@@ -214,9 +232,8 @@ const ArtistLanding = () => {
       window.addEventListener('scroll',
         handleScroll
       )
-    }, [setParam, setOpenError])
+    }, [setParam, setOpenError, artists])
 
-    const artists = useContext(UserContext)
 
     const animation = useSpring({
       opacity: on ? 1 : 0,
@@ -301,11 +318,11 @@ const ArtistLanding = () => {
               </OverlayedContainer>
           </Section>
           <Section>
-              <OverlayedContainer>
-                    <TagResourceContainer>
-                        <PublicMusic />
-                    </TagResourceContainer>
-              </OverlayedContainer>
+            <PlayerContainer>
+              <TagResourceContainer>
+                <PublicMusic />
+              </TagResourceContainer>
+            </PlayerContainer>
           </Section>
           <Section>
               <OverlayedContainer>

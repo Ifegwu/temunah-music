@@ -13,13 +13,13 @@ import Button from "@material-ui/core/Button";
 import Lock from "@material-ui/icons/Lock"
 import Error from '../Error'
 import withStyles from "@material-ui/core/styles/withStyles";
-import { navigate, Link } from 'gatsby';
+import { navigate } from 'gatsby';
 import { ThemeProvider } from '@material-ui/core';
-import theme from '../ThemeModified'
+import theme from '../../styles/ThemeModified'
 import styled from 'styled-components'
-import { createCookie } from '../../utils/client';
+import { createCookie, IS_LOGGED_IN_QUERY } from '../../utils/client';
 
-const StyledLink = styled(Link)`
+const StyledLink = styled.a`
 	text-decoration: none;
 	color: indigo;
 	font-size: 20px;
@@ -42,9 +42,27 @@ const Login = ({ classes, setNewUser }) => {
 			// return localStorage.removeItem('authToken');
 			return createCookie('authToken', '', -1);
 		} else {
-			client.writeData({ data: { isLoggedIn: true } })
+			// client.writeData({ data: { isLoggedIn: true } })
+			const readUser = client.readQuery({
+				query: IS_LOGGED_IN_QUERY,
+				data: { 
+					isLoggedIn: true
+				},
+				variables: {
+                    id: []
+                }
+			}); 
+			client.writeQuery({ 
+				query: IS_LOGGED_IN_QUERY, 
+				data: { 
+					isLoggedIn: readUser
+				},
+				variables: {
+                    id: []
+                }
+			})
 		}
-		navigate("/music")
+		navigate("/app/dashboard")
 	}
 	
 	
@@ -62,7 +80,6 @@ const Login = ({ classes, setNewUser }) => {
 					<Mutation mutation={LOGIN_MUTATION}
 						variables={{ username, password }}
 						onCompleted={data => {
-							// console.log({ data })
 						}}
 					>
 						{(loginUser, {loading, error, called, client}) => {
@@ -121,10 +138,7 @@ const Login = ({ classes, setNewUser }) => {
 						}}
 					</Mutation>
 						<Typography color="textPrimary" variant='h6'>
-							
-							{/* <ForgotPassword /> */}
-							{/* <PasswordReset /> */}
-							<StyledLink to={`${API_URL}/password-reset`}>Forgot password</StyledLink>
+							<StyledLink href={`${API_URL}/password-reset`}>Forgot password</StyledLink>
 						</Typography>
 				</ThemeProvider>
 			</Paper>
@@ -137,6 +151,9 @@ const LOGIN_MUTATION = gql`
 		loginUser(username: $username, password: $password) {
 			token
 			message
+			user {
+				id
+			}
 		}
 	}
 `

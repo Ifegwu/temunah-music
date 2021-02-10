@@ -11,6 +11,8 @@ const ArtistGrid = styled.div`
     padding-top: 120px;
     padding-left: 4px;
     padding-bottom: 4px;
+
+    font-family: "Poppins", sans-serif;
 `;
 const H2 = styled.h2`
     padding-top: 16px;
@@ -27,7 +29,6 @@ const Div = styled.div`
 
 const AdvertPage = ({ data }) => {
     const { advert } = data;
-    console.log(advert.name);
     return (
         <Layout>
             <ArtistGrid>

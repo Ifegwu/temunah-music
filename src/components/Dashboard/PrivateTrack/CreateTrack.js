@@ -21,9 +21,9 @@ import Fab from '@material-ui/core/Fab';
 import Error from '../../Error'
 import Loading from "../../Auth/Loading";
 
-import { GET_TRACKS_QUERY } from '../../../pages/music'
+import { GET_TRACKS_QUERY } from '../DashboardComponent'
 import { LinearProgress, ThemeProvider } from "@material-ui/core";
-import theme from '../../ThemeModified'
+import theme from '../../../styles/ThemeModified'
 
 const CreateTrack = ({ classes }) => {
   const [open, setOpen] =  useState(false)
@@ -38,7 +38,7 @@ const CreateTrack = ({ classes }) => {
   const handleAudioChange = event => {
     event.preventDefault()
     const selectedFile = event.target.files[0]
-    const fileSizeLimit = 10000000 // 10MB
+    const fileSizeLimit = 13000000 // 13MB
     if (selectedFile && selectedFile.size > fileSizeLimit) {
       setAudioFileError(`${selectedFile.name}: File size is too large`)
     } else {
@@ -50,7 +50,7 @@ const CreateTrack = ({ classes }) => {
   const handleAvatarChange = event => {
     event.preventDefault()
     const selectedFile = event.target.files[0]
-    const fileSizeLimit = 1000000 // 0.5MB
+    const fileSizeLimit = 100000 // 1MB
     if (selectedFile && selectedFile.size > fileSizeLimit) {
       setImageFileError(`${selectedFile.name}: File size is too large`)
     } else { 
@@ -70,7 +70,6 @@ const CreateTrack = ({ classes }) => {
       
       return res.data.url
     } catch(err) {
-      console.error('Error uploading file', err)
       setSubmitting(false)
     }
   }
@@ -86,7 +85,6 @@ const CreateTrack = ({ classes }) => {
       
       return res.data.url
     } catch(err) {
-      console.error('Error uploading file', err)
       setSubmitting(false)
     }
   }
@@ -127,7 +125,6 @@ const CreateTrack = ({ classes }) => {
     <Mutation 
       mutation={CREATE_TRACK_MUTATION}
       onCompleted={data => {
-        console.log(data)
         setSubmitting(false)
         setOpen(false)
         setTitle("")
@@ -151,7 +148,7 @@ const CreateTrack = ({ classes }) => {
                 <LinearProgress />
                 <DialogContent>
                   <DialogContentText>
-                    Add a Title, Description, Audio (under 10MB) & Image Files (under 1MB)
+                    Add a Title, Description, Audio (under 13MB) & Image Files (under 1MB)
                   </DialogContentText>
                   <FormControl fullWidth>
                     <TextField

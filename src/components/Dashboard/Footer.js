@@ -13,7 +13,7 @@ const Footer = () => {
       <Column>
         <Card>
           <H3>&copy; {new Date().getFullYear()}</H3>
-          <Logo to="/music">
+          <Logo to="/app/dashboard">
             <H3>Temunah Music</H3>
           </Logo>
         </Card>

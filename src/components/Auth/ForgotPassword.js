@@ -4,7 +4,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import SettingsIcon from '@material-ui/icons/Settings';
 import { ApolloConsumer, Mutation } from "react-apollo"
 import { ThemeProvider } from '@material-ui/core'
-import theme from '../ThemeModified'
+import theme from '../../styles/ThemeModified'
 
 import Error from '../Error'
 import { 

@@ -23,7 +23,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import Snackbar from "@material-ui/core/Snackbar";
 import { ThemeProvider } from '@material-ui/core';
 // import Payment from '../Payment/payment';
-import theme from '../ThemeModified'
+import theme from '../../styles/ThemeModified'
 
 
 const REGISTER_MUTATION = gql`
@@ -52,7 +52,6 @@ const Register = ({ setNewUser, classes }) => {
 	useEffect(() => {
 		const searchParams = parse(location.search)
 		setParam(searchParams)
-		// console.log(searchParams.message)
 		
 		if(openError){
 				setTimeout(() => {

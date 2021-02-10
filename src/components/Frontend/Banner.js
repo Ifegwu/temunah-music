@@ -97,10 +97,27 @@ const HeroGroup = styled.div`
             padding: auto auto;
             padding-bottom: 8px;
         }
+        /* h3 {
+            font-size: 32px;
+            padding: auto auto;
+            padding-bottom: 8px;
+        } */
         p {
             font-size: 24px;
             padding: auto auto;
             padding-bottom: 8px;
+        }
+    }
+
+    @media ${device.mobileS} {
+        h1 {
+            font-size: relative-size;
+        }
+        h3 {
+            font-size: relative-size;
+        }
+        p {
+            font-size: relative-size;
         }
     }
 
@@ -154,7 +171,7 @@ export default function Banner() {
                             <BannerContainer>
                                 <BannerContent>
                                     <h1>Temunah Music</h1>
-                                    <h3>Promoting Musical Talents</h3>
+                                    <h3>Promoting Musical Skills & Talents</h3>
                                     <p>
                                        <ModelComponent>Watch Demo</ModelComponent>
                                     </p>
