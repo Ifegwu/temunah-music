@@ -98,9 +98,9 @@ export default function ArtistsList ({ artists }) {
             <ArtistGridStyles>
                 {artists.map((artist) => {
                     return (
-                            <SingleArtist key={artist.id} artist={artist} />
-                            )
-                        })}
+                        <SingleArtist key={artist.id} artist={artist} />
+                    )
+                })}
             </ArtistGridStyles>
         </Background>
     )

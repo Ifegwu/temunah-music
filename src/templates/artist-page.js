@@ -67,8 +67,10 @@ const ArtistPage = ({ data }) => {
                             <strong>{artist.name}</strong>
                         </H2>
                         <H6Plus>Album: {artist.albums.name}</H6Plus>
-                        <H6Plus> By: {artist.artist.join(', ft: ')}</H6Plus>
-                        <H6Plus><strong>{artist.description}</strong></H6Plus>
+                        <H6Plus> <>By:</> {artist.artist.join(', ft: ')}</H6Plus>
+                        <H6Plus>
+                        <strong>{artist.description}</strong>
+                        </H6Plus>
                         <SocialLogo>
                             <Link to={artist.person.facebook}><FacebookSocial /></Link>
                             <Link to={artist.person.instagram}><InstagramSocial /></Link>

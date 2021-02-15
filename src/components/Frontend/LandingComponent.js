@@ -4,12 +4,12 @@ import { Waypoint } from 'react-waypoint';
 import { parse } from "query-string"
 import { useLocation } from "@reach/router"
 import { animated, useSpring, config } from 'react-spring';
-import { UserContext } from '../components/Frontend/Layout';
-import Banner from '../components/Frontend/Banner'
-import PublicMusic from '../components/Frontend/PublicTrack/PublicMusic'
+import { UserContext } from './Layout';
+import Banner from './Banner'
+import PublicMusic from './PublicTrack/PublicMusic'
 import { OutboundLink } from "gatsby-plugin-google-analytics"
-import TwitterSocial from "../components/Frontend/Newsletter/TwitterSocial"
-import GitHubSocial from "../components/Frontend/Newsletter/GithubSocial"
+import TwitterSocial from "./Newsletter/TwitterSocial"
+import GitHubSocial from "./Newsletter/GithubSocial"
 import { 
             Container, 
             deviceMin, 
@@ -18,15 +18,15 @@ import {
             P, 
             TagResourceContainer,
             Button
-        } from "../components/Frontend/Primitives"
-import SEO from "../components/seo"
-import ArtistsList from '../components/Frontend/ArtistsList';
-import AdvertList from '../components/Frontend/Adverts';
+        } from "./Primitives"
+import SEO from "../seo"
+import ArtistsList from './ArtistsList';
+import AdvertList from './Adverts';
 import { useStaticQuery, graphql } from 'gatsby';
-import Musician from '../components/Frontend/Musician';
+import Musician from './Musician';
 import { Snackbar } from '@material-ui/core';
-import theme from '../styles/ThemeModified'
-import bg from '../assets/images/twistedlines.svg';
+import theme from '../../styles/ThemeModified'
+import bg from '../../assets/images/twistedlines.svg';
 
 const OverlayedContainer = styled(Container)`
   padding: 20px 20px;
@@ -201,7 +201,7 @@ const PhoneAndEmail = styled.div`
   }
 `
 
-const ArtistLanding = () => {
+const LandingComponent = () => {
     const [on, toggle] =  useState(false)
     const [hasScrolled, setHasScrolled] = useState(false)
     const [openError, setOpenError] = useState(true)
@@ -367,6 +367,7 @@ export const AdvertQuery = () => {
 }
   
 
-export default ArtistLanding
+export default LandingComponent;
+
 
 

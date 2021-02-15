@@ -9,11 +9,10 @@ import FrontNav from './FrontNav';
 import Footer from './Footer';
 import GlobalStyles from '../../styles/GlobalStyles';
 import Typography from '../../styles/Typography';
-import ArtistLanding from '../../pages/artists-landing';
 import Loading from '../Auth/Loading'
+import LandingComponent from './LandingComponent';
 
 const ContactMe = React.lazy(() => import('../../pages/contactme'))
-const Authenticate = React.lazy(() => import('../Auth/Authenticate'))
 
 export const UserContext = React.createContext()
 
@@ -22,13 +21,12 @@ const ContentStyles = styled.div`
   background: white;
   /* padding: 2rem; */
 `;
-// const ArtistsPage = React.lazy(() => import('../../pages/artists'))
 
-const LazyComponent = ({ Component, ...props }) => (
-    <React.Suspense fallback={<Loading />}>
-      <Component {...props} />
-    </React.Suspense>
-);
+// const LazyComponent = ({ Component, ...props }) => (
+//     <React.Suspense fallback={<Loading />}>
+//       <Component {...props} />
+//     </React.Suspense>
+// );
 
 const Layout = ({ children, props }) => {
   const [openError, setOpenError] = useState(true)
@@ -58,9 +56,9 @@ const Layout = ({ children, props }) => {
         <ContentStyles>
           <FrontNav />
           <Router basepath={withPrefix("/")} >
-            <ArtistLanding path="/" />
-            <LazyComponent exact Component={Authenticate} path="/auth" />
-            <LazyComponent exact Component={ContactMe} path="/contact" />
+            <LandingComponent path="/" />
+            {/* <LazyComponent Component={ContactMe} path="/contact" /> */}
+            {/* <ContactMe path="/contact" /> */}
           </Router>
           {
             param.message && <Snackbar message={param.message} open={openError} autoHideDuration={6000} />
