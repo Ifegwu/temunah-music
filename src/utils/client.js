@@ -23,7 +23,8 @@ export function readCookie(key) {
 }
 
 export const client = new ApolloClient({
-  uri: 'http://ec2-3-250-176-35.eu-west-1.compute.amazonaws.com:8000/graphql/',
+  uri: 'https://ec2-3-250-176-35.eu-west-1.compute.amazonaws.com:8000/graphql/',
+  // uri: 'http://localhost:8000/graphql/',
   fetch,
   fetchOptions: {
     credentials: "include"
