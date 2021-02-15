@@ -26,7 +26,7 @@ const StyledLink = styled.a`
 `
 
 
-export const API_URL ='http://localhost:8000'
+export const API_URL ='http://ec2-3-250-176-35.eu-west-1.compute.amazonaws.com:8000'
 
 const Login = ({ classes, setNewUser }) => {
     const [username, setUsername] = useState("")
