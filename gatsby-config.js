@@ -3,6 +3,10 @@ const dotenv = require(`dotenv`);
 dotenv.config({ path: '.env' });
 // console.log(process.env.SANITY_TOKEN);
 
+require("dotenv").config({
+  path: `.env.${process.env.GRAPHQL_API_ENDPOINT}`,
+})
+
 module.exports = {
   siteMetadata: {
     title: `Temunah Music`,
