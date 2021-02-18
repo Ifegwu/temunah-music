@@ -23,7 +23,7 @@ export function readCookie(key) {
 }
 
 export const client = new ApolloClient({
-  uri: `${process.env.API_ENDPOINT}/graphql/`,
+  uri: 'https://api-temunah-music.herokuapp.com/graphql/',
   fetch,
   fetchOptions: {
     credentials: "include"

@@ -26,7 +26,7 @@ const StyledLink = styled.a`
 `
 
 
-// export const API_URL ='https://api-temunah-music.herokuapp.com'
+export const API_URL ='https://api-temunah-music.herokuapp.com'
 const Login = ({ classes, setNewUser }) => {
     const [username, setUsername] = useState("")
 	const [password, setPassword] = useState("")
@@ -137,7 +137,7 @@ const Login = ({ classes, setNewUser }) => {
 						}}
 					</Mutation>
 						<Typography color="textPrimary" variant='h6'>
-							<StyledLink href={`${process.env.API_ENDPOINT}/password-reset`}>Forgot password</StyledLink>
+							<StyledLink href={`${API_URL}/password-reset`}>Forgot password</StyledLink>
 						</Typography>
 				</ThemeProvider>
 			</Paper>
