@@ -12,7 +12,7 @@ import { ThemeProvider } from '@material-ui/core';
 import theme from '../../../styles/ThemeModified'
 import {Image, CloudinaryContext} from 'cloudinary-react';
 
-import { Link, useStaticQuery, graphql } from 'gatsby'
+import { Link, useStaticQuery } from 'gatsby'
 import styled from 'styled-components'
 
 import AudioPlayer from './AudioPlayer'
@@ -97,28 +97,23 @@ const Pre = styled.pre`
   justify-items: center;
 `
 const TrackList = ({ classes, tracks, currentUser }) => {
-  const data = useStaticQuery(graphql`
-      query CloudinaryImages {
-        allCloudinaryMedia {
-          edges {
-            node {
-              secure_url
-            }
-          }
-        }
-      }
-    `
-  );
-  const gravatars = data.allCloudinaryMedia.edges;
-  const gravatarArray = gravatars.map((image, i) => (
-    <div key={`${i}-cl`}>
-      <Avatar src={image.node.secure_url} />
-    </div>
-  ))
+  // const data = useStaticQuery(graphql`
+  //     query CloudinaryImages {
+  //       allCloudinaryMedia {
+  //         edges {
+  //           node {
+  //             secure_url
+  //           }
+  //         }
+  //       }
+  //     }
+  //   `
+  // );
+  // const gravatars = data.allCloudinaryMedia.edges;
   return (
     <ThemeProvider theme={theme}>
       <List>
-        {tracks.map((track, index) => (
+        {tracks.map(track => (
           <Accordion key={track.id}>
             <AccordionSummary expandIcon={<ExpandMoreIcon />}>
               <ListItem className={classes.root}>
@@ -126,7 +121,13 @@ const TrackList = ({ classes, tracks, currentUser }) => {
                   <ListItemText>
                       <GridStyle>
                         <Grid container alignItems="center">
-                          {gravatarArray[index].reverse()}
+                          {/* {gravatars.map((image, i) => (
+                                <div key={`${i}-cl`}>
+                                  <Avatar src={image.node.secure_url} />
+                                </div>
+                              ))
+                          } */}
+                          <Avatar src={track.avarta} />
                         </Grid>
                       </GridStyle>
                   </ListItemText>
