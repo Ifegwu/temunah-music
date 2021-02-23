@@ -10,8 +10,9 @@ import Avatar from '@material-ui/core/Avatar';
 import Grid from '@material-ui/core/Grid';
 import { ThemeProvider } from '@material-ui/core';
 import theme from '../../../styles/ThemeModified'
+import {Image, CloudinaryContext} from 'cloudinary-react';
 
-import { Link } from 'gatsby'
+import { Link, useStaticQuery, graphql } from 'gatsby'
 import styled from 'styled-components'
 
 import AudioPlayer from './AudioPlayer'
@@ -95,58 +96,78 @@ const Pre = styled.pre`
   justify-self: center;
   justify-items: center;
 `
-const TrackList = ({ classes, tracks, currentUser }) => (
-  <ThemeProvider theme={theme}>
-    <List>
-      {tracks.map(track => (
-        <Accordion key={track.id}>
-          <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-            <ListItem className={classes.root}>
-              <AvatarLikedTracks>
-                <ListItemText>
-                    <GridStyle>
-                      <Grid container alignItems="center">
-                        <Avatar src={track.avarta}/>
-                      </Grid>
-                    </GridStyle>
-                </ListItemText>
-                <ListItemText
-                  primaryTypographyProps={{
-                    variant: "subtitle1",
-                    color: "primary"
-                  }}
-                  primary={track.title}
-                  secondary={
-                    <Link className={ classes.link } to={`/profile/${track.postedBy.id}`}>
-                      {track.postedBy.username}
-                    </Link>
-                  }
-                />
-                <LikedStyle>
-                  <LikeTrack trackId={track.id} likeCount={track.likes.length} currentUser={currentUser}/>
-                </LikedStyle>
-                <LikedStyle>
-                  <AudioPlayer url={track.url} />
-                </LikedStyle>
-              </AvatarLikedTracks>
-            </ListItem>
-          </AccordionSummary>
-          <AccordionDetails className={classes.detail}>
-            <Pre> 
-              <Typography variant="body1">
-                {track.description}
-              </Typography>
-            </Pre>
-          </AccordionDetails>
-          <AccordionActions>
-            <UpdateTrack track={track} />
-            <DeleteTrack track={track} />
-          </AccordionActions>
-        </Accordion>
-      ))}
-    </List>
-  </ThemeProvider>
-)
+const TrackList = ({ classes, tracks, currentUser }) => {
+  const data = useStaticQuery(graphql`
+      query CloudinaryImages {
+        allCloudinaryMedia {
+          edges {
+            node {
+              secure_url
+            }
+          }
+        }
+      }
+    `
+  );
+  const gravatars = data.allCloudinaryMedia.edges;
+  const gravatarArray = gravatars.map((image, i) => (
+    <div key={`${i}-cl`}>
+      <Avatar src={image.node.secure_url} />
+    </div>
+  ))
+  return (
+    <ThemeProvider theme={theme}>
+      <List>
+        {tracks.map((track, index) => (
+          <Accordion key={track.id}>
+            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+              <ListItem className={classes.root}>
+                <AvatarLikedTracks>
+                  <ListItemText>
+                      <GridStyle>
+                        <Grid container alignItems="center">
+                          {gravatarArray[index]}
+                        </Grid>
+                      </GridStyle>
+                  </ListItemText>
+                  <ListItemText
+                    primaryTypographyProps={{
+                      variant: "subtitle1",
+                      color: "primary"
+                    }}
+                    primary={track.title}
+                    secondary={
+                      <Link className={ classes.link } to={`/profile/${track.postedBy.id}`}>
+                        {track.postedBy.username}
+                      </Link>
+                    }
+                  />
+                  <LikedStyle>
+                    <LikeTrack trackId={track.id} likeCount={track.likes.length} currentUser={currentUser}/>
+                  </LikedStyle>
+                  <LikedStyle>
+                    <AudioPlayer url={track.url} />
+                  </LikedStyle>
+                </AvatarLikedTracks>
+              </ListItem>
+            </AccordionSummary>
+            <AccordionDetails className={classes.detail}>
+              <Pre> 
+                <Typography variant="body1">
+                  {track.description}
+                </Typography>
+              </Pre>
+            </AccordionDetails>
+            <AccordionActions>
+              <UpdateTrack track={track} />
+              <DeleteTrack track={track} />
+            </AccordionActions>
+          </Accordion>
+        ))}
+      </List>
+    </ThemeProvider>
+  )
+}
 
 const styles = theme => ({
   root: {

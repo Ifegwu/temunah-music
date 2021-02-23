@@ -23,7 +23,8 @@ export function readCookie(key) {
 }
 
 export const client = new ApolloClient({
-  uri: 'https://api-temunah-music.herokuapp.com/graphql/',
+  // uri: 'https://api-temunah-music.herokuapp.com/graphql/',
+  uri: 'http://localhost:8000/graphql/',
   fetch,
   fetchOptions: {
     credentials: "include"

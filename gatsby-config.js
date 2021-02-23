@@ -71,6 +71,15 @@ module.exports = {
         endpoint: "https://gmail.us17.list-manage.com/subscribe/post?u=f1944ba4ef19adb37767acbe3&amp;id=0ca64b75f6"
       }
     },
+    {
+    resolve:`gatsby-source-cloudinary`,
+    options: {
+    cloudName: process.env.CLOUDINARY_CLOUD_NAME,
+    apiKey: process.env.CLOUDINARY_API_KEY,
+    apiSecret: process.env.CLOUDINARY_API_SECRET,
+    resourceType: `image`,
+    }
+}
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
