@@ -126,7 +126,7 @@ const TrackList = ({ classes, tracks, currentUser }) => {
                   <ListItemText>
                       <GridStyle>
                         <Grid container alignItems="center">
-                          {gravatarArray[index]}
+                          {gravatarArray[index].reverse()}
                         </Grid>
                       </GridStyle>
                   </ListItemText>
