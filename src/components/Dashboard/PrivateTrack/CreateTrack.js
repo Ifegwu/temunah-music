@@ -50,7 +50,7 @@ const CreateTrack = ({ classes }) => {
   const handleAvatarChange = event => {
     event.preventDefault()
     const selectedFile = event.target.files[0]
-    const fileSizeLimit = 100000 // 1MB
+    const fileSizeLimit = 1000000 // 1MB
     if (selectedFile && selectedFile.size > fileSizeLimit) {
       setImageFileError(`${selectedFile.name}: File size is too large`)
     } else { 
@@ -209,7 +209,7 @@ const CreateTrack = ({ classes }) => {
                         component="span"
                         className={classes.icon}
                       >
-                        Avarta File
+                        Avatar File
                         <AccountCircleIcon className={classes.icon} />
                       </Button>
                       {imageFile && imageFile.name}

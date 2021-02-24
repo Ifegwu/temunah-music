@@ -1,14 +1,26 @@
-import React, { useContext, useEffect }  from "react";
+import React, { useState, useContext }  from "react";
 import { Mutation } from 'react-apollo'
 import { gql } from 'apollo-boost'
 import IconButton from "@material-ui/core/IconButton";
 import TrashIcon from "@material-ui/icons/DeleteForeverOutlined";
 import { GET_TRACKS_QUERY } from '../DashboardComponent'
 import { UserContext } from '../Layout';
+import ConfirmDialog from './ConfirmDialog';
+import styled from 'styled-components';
 
-const DeleteTrack = ({ track }) => {
+const DialogBackground = styled.div`
+  background-color: var(--grayPro);
+  padding: auto auto;
+  padding-top: 8px;
+  padding-left: 4px;
+  padding-right: 4px;
+  align-items: center;
+  justify-content: center;
+`
+
+const DeleteTrack = ({ classes, track }) => {
   const currentUser = useContext(UserContext)
-  
+  const [confirmOpen, setConfirmOpen] = useState(false)
   const isPresentUser = currentUser ? currentUser.id === track.postedBy.id : null
 
   const handleUpdateCache = (cache, { data: { deleteTrack } }) => {
@@ -32,9 +44,22 @@ const DeleteTrack = ({ track }) => {
         update={handleUpdateCache}
       >
         {deleteTrack => (
-          <IconButton onClick={deleteTrack}>
-            <TrashIcon />
-          </IconButton>
+          <div>
+            <IconButton onClick={() => setConfirmOpen(true)}>
+              <TrashIcon />
+            </IconButton>
+            <ConfirmDialog
+              title="Delete music?"
+              open={confirmOpen}
+              setOpen={setConfirmOpen}
+              onConfirm={deleteTrack}
+            >
+              <DialogBackground>
+                Are you sure you want to delete '{track.title}' music?
+              </DialogBackground>
+            </ConfirmDialog>
+
+          </div>
         )}
       </Mutation>
     ) : null;
