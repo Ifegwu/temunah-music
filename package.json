@@ -1,9 +1,9 @@
 {
-  "name": "gatsby-starter-default",
+  "name": "temunah-music",
   "private": true,
-  "description": "A simple starter to get up and developing quickly with Gatsby",
+  "description": "A Gospel Music paltform for all",
   "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "Daniel Agbanyim <danielagbanyim@hotmail.com",
   "dependencies": {
     "@material-ui/core": "^4.11.2",
     "@material-ui/icons": "^4.11.2",
