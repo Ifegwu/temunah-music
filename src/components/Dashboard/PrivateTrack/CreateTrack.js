@@ -68,7 +68,8 @@ const CreateTrack = ({ classes }) => {
       data.append('cloud_name', 'apitem')
       const res = await axios.post('https://api.cloudinary.com/v1_1/apitem/raw/upload', data)
       
-      return res.data.url
+      console.log(res.data.secure_url)
+      return res.data.secure_url
     } catch(err) {
       setSubmitting(false)
     }
@@ -83,7 +84,8 @@ const CreateTrack = ({ classes }) => {
       data.append('cloud_name', 'apitem')
       const res = await axios.post('https://api.cloudinary.com/v1_1/apitem/image/upload', data)
       
-      return res.data.url
+      console.log(res.data.secure_url)
+      return res.data.secure_url
     } catch(err) {
       setSubmitting(false)
     }
