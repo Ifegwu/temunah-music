@@ -288,7 +288,7 @@ const LandingComponent = () => {
                                   <PhoneAndEmail>
                                       <P>
                                           <strong>Phone: </strong>
-                                          +234 81 652 125 74
+                                          +49 1521 9330 345
                                       </P>
                                       <P>
                                           <strong>Email: </strong>

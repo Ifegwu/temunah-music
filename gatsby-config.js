@@ -11,7 +11,8 @@ module.exports = {
   siteMetadata: {
     title: `Temunah Music`,
     description: `Promoting Musical Talents`,
-    author: `@Daniel`
+    author: `@Daniel`,
+    image: `src/assets/images/logo.svg`
   },
   plugins: [
     {

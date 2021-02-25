@@ -175,6 +175,11 @@ const CardContent = styled.div`
     }
 `
 
+const AmountStyle = styled.div`
+    display: grid;
+    grid-template-columns: auto auto;
+`
+
 export const GET_TRACKS_QUERY = gql`
     query getTracksQuery {
         tracks(first: 10, skip: 1) {
@@ -217,7 +222,15 @@ const DashboardComponent = ({ classes }) => {
                                                 <StripeCard>
                                                     <StripeAritcleOne>
                                                         <h2>Subscription</h2>
-                                                        <h4>N</h4><h1>5000/</h1>
+                                                        <AmountStyle>
+                                                            <h4>N</h4>
+                                                            <h3>5000</h3>
+                                                        </AmountStyle>                            
+                                                        <AmountStyle><h3>OR</h3></AmountStyle>
+                                                        <AmountStyle>
+                                                            <h3>{'\u20AC'}</h3>
+                                                            <h3>11</h3>
+                                                        </AmountStyle>
                                                         <h3>Billed Monthly</h3>
                                                     </StripeAritcleOne>
                                                     <Divider className={classes.divider} />
