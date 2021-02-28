@@ -10,9 +10,11 @@ require("dotenv").config({
 module.exports = {
   siteMetadata: {
     title: `Temunah Music`,
-    description: `Promoting Musical Talents`,
+    description: `Promoting Musical Skills and Talents`,
     author: `@Daniel`,
-    image: `src/assets/images/logo.svg`
+    image: `src/assets/images/logo.svg`,
+    keywords: `gospel, music, temunah music, skills, talents, Nigeria, Africa, Germany, christian-songs, gospel artists`,
+    url: `https://www.temunah.online`
   },
   plugins: [
     {
@@ -62,7 +64,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
-        trackingId: "UA-54516992-1",
+        trackingId: "UA-126176030-1",
         head: true
       }
     },

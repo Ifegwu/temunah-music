@@ -245,7 +245,7 @@ const LandingComponent = () => {
     const adverts = nodes;
     return(
       <>
-          <SEO title="Home" />
+          <SEO />
           <section>
               <Banner />
           </section>
