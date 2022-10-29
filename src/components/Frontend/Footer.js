@@ -6,7 +6,7 @@ import TwitterSocial from "../Frontend/Newsletter/TwitterSocial"
 import NewsletterForm from "../Frontend/Newsletter/NewsletterFooter"
 import styled from "styled-components"
 import { OutboundLink } from "gatsby-plugin-google-analytics"
-import CookieConsent, { Cookies } from "react-cookie-consent";
+import CookieConsent from "react-cookie-consent";
 
 const Footer = () => {
   return (

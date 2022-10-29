@@ -19,7 +19,7 @@ export default function SEO({ children, location, description, title, image }) {
   return (
     <Helmet titleTemplate={`%s - ${site.siteMetadata.title}`}>
       <html lang="en" />
-      <title>{site.siteMetadata.description}</title>
+      <title>{site.siteMetadata.title}</title>
       {/* Fav Icons */}
       <link rel="icon" type="image/svg+xml" href={site.siteMetadata.image}  />
       <link rel="alternate icon" href={site.siteMetadata.image} />
